@@ -67,7 +67,6 @@ class Pad : public ServiceBase<IPad> {
                     pads[instance_id] = handle;
                 }
 
-                // ref: https://wiki.libsdl.org/SDL3/README/migration
                 // TODO: Verificar se preciso limpar no release como abaixo
                 // SDL_free(joysticks);
             }

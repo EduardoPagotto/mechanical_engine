@@ -81,7 +81,8 @@ class CanvasFB : public ServiceBase<ICanva> {
 
     virtual void after() override {
 
-        // #define __FRAMEBUFFER_GPU_SET 1
+        // TODO: Colocar no CMAKE este def
+#define __FRAMEBUFFER_GPU_SET 1
 
 #ifdef __FRAMEBUFFER_GPU_SET
         // Atualiza a textura pela GPU

@@ -1,5 +1,5 @@
 # mechanical_engine
-Simple game engine using SDL
+Simple game engine using SDL3
 
 ## Features
 - Editor: vscode
@@ -20,3 +20,7 @@ make
 # or
 # cmake -B build -DCMAKE_TOOLCHAIN_FILE=./toolchain/clang.cmake
 ```
+
+## refs:
+- https://solhsa.com/gp2/index.html
+- https://wiki.libsdl.org/SDL3/README/migration
