@@ -1,6 +1,6 @@
 #pragma once
 #include "service_locator.hpp"
-#include <SDL2/SDL.h>
+#include <SDL3/SDL.h>
 #include <glm/glm.hpp>
 
 namespace me {
@@ -17,6 +17,7 @@ class ICanva : public IService {
     virtual void toggleFullScreen() = 0;
     virtual void reshape(int _width, int _height) = 0;
     virtual uint32_t* getPixels() = 0;
+    virtual SDL_PixelFormat getPixelFormat() = 0;
     virtual const int getWidth() const = 0;
     virtual const int getHeight() const = 0;
 };
@@ -70,7 +71,7 @@ class IPad : public IService {
   public:
     virtual ~IPad() noexcept = default;
     virtual const bool getEvent(const SDL_Event& event) noexcept = 0;
-    virtual SDL_GameController* get(const SDL_JoystickID& joystick_id) noexcept = 0;
+    virtual SDL_Gamepad* get(const SDL_JoystickID& joystick_id) noexcept = 0;
 };
 
 class IEvent : public IService {

@@ -116,7 +116,27 @@
 		"cmake.useCMakePresets": "never",
 		// OTHERS
 		"files.associations": {
-			"iostream": "cpp"
+			"iostream": "cpp",
+			"string_view": "cpp",
+			"cstdlib": "cpp",
+			"text_encoding": "cpp",
+			"thread": "cpp",
+			"any": "cpp",
+			"array": "cpp",
+			"charconv": "cpp",
+			"compare": "cpp",
+			"complex": "cpp",
+			"functional": "cpp",
+			"ratio": "cpp",
+			"scoped_allocator": "cpp",
+			"tuple": "cpp",
+			"type_traits": "cpp",
+			"utility": "cpp",
+			"variant": "cpp",
+			"memory": "cpp",
+			"format": "cpp",
+			"future": "cpp",
+			"istream": "cpp"
 		},
 	},
 	"launch": {
@@ -129,7 +149,15 @@
 				"program": "${workspaceFolder}/bin/template_cpp",
 				"args": [],
 				"cwd": "${workspaceFolder}"
-			}
+			},
+			{
+				"name": "raycasting",
+				"type": "lldb",
+				"request": "launch",
+				"program": "${workspaceFolder}/bin/raycasting",
+				"args": [],
+				"cwd": "${workspaceFolder}"
+			},
 		],
 		"compounds": []
 	}

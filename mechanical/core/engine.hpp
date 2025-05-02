@@ -51,7 +51,7 @@ class Engine {
             beginCount = SDL_GetTicks();
             while (SDL_PollEvent(&event)) {
                 switch (event.type) {
-                    case SDL_USEREVENT: {
+                    case SDL_EVENT_USER: {
 
                         switch (event.user.code) {
                             case EVENT_FLOW_PAUSE: {
@@ -64,9 +64,10 @@ class Engine {
                             } break;
                             case EVENT_FLOW_STOP: {
                                 SDL_Event l_eventQuit;
-                                l_eventQuit.type = SDL_QUIT;
-                                if (SDL_PushEvent(&l_eventQuit) == -1) {
-                                    SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Critical SDL_QUIT PushEvent fail: %s", SDL_GetError());
+                                l_eventQuit.type = SDL_EVENT_QUIT;
+                                if (!SDL_PushEvent(&l_eventQuit)) {
+                                    SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Critical SDL_QUIT PushEvent fail: %s",
+                                                 SDL_GetError());
                                 }
                             } break;
                             case EVENT_TOGGLE_FULL_SCREEN:
@@ -78,15 +79,11 @@ class Engine {
                     }
 
                     break;
-                    case SDL_QUIT:
+                    case SDL_EVENT_QUIT:
                         kill = true;
                         break;
-                    case SDL_WINDOWEVENT: {
-                        switch (event.window.event) {
-                            case SDL_WINDOWEVENT_RESIZED: // set windows size
-                                canvas->reshape(event.window.data1, event.window.data2);
-                                break;
-                        }
+                    case SDL_EVENT_WINDOW_RESIZED: {
+                        canvas->reshape(event.window.data1, event.window.data2);
                     } break;
                     default:
                         break;

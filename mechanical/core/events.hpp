@@ -1,5 +1,5 @@
 #pragma once
-#include <SDL2/SDL.h>
+#include <SDL3/SDL.h>
 
 namespace me {
 
@@ -14,19 +14,6 @@ const int32_t EVENT_COLLIDE_START = 0x1001;      // START_COLLIDE
 const int32_t EVENT_COLLIDE_ON = 0x1002;         // ON_COLLIDE
 const int32_t EVENT_COLLIDE_OFF = 0x1003;        // OFF_COLLIDE
 
-// // FIXME: usar smartpointers aqui no lugar de void*
-// void utilSendEvent(const int32_t& user_event, void* _paramA, void* _paramB) {
-//     SDL_Event event;
-//     SDL_zero(event);
-//     event.type = SDL_USEREVENT;
-//     event.user.code = user_event;
-//     event.user.data1 = _paramA;
-//     event.user.data2 = _paramB;
-//     if (SDL_PushEvent(&event) == -1) {
-//         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Critical PushEvent fail: %s", SDL_GetError());
-//     }
-// }
-
 class Event : public ServiceBase<IEvent> {
   public:
     Event() noexcept = default;
@@ -35,11 +22,11 @@ class Event : public ServiceBase<IEvent> {
     virtual void send(const int32_t& user_event, void* _paramA, void* _paramB) override {
         SDL_Event event;
         SDL_zero(event);
-        event.type = SDL_USEREVENT;
+        event.type = SDL_EVENT_USER;
         event.user.code = user_event;
         event.user.data1 = _paramA;
         event.user.data2 = _paramB;
-        if (SDL_PushEvent(&event) == -1) {
+        if (SDL_PushEvent(&event) == false) {
             SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Critical PushEvent fail: %s", SDL_GetError());
         }
     }

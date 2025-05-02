@@ -3,12 +3,19 @@
 #include "mechanical/core/engine.hpp"
 #include "mechanical/core/global.hpp"
 #include "mechanical/core/keyboard.hpp"
+#include "mechanical/core/pad.hpp"
+#include <config_params.hpp>
 #include <iostream>
+#include <string>
 
 int main(int argn, char** argv) {
     using namespace me;
     try {
-        SDL_LogSetAllPriority(SDL_LOG_PRIORITY_DEBUG);
+
+        SDL_SetAppMetadata(std::string(project_name).c_str(), std::string(project_version).c_str(),
+                           "com.mechanical.engine");
+
+        SDL_SetLogPriorities(SDL_LOG_PRIORITY_DEBUG);
         SDL_Log("Simple ray-casting Iniciado");
 
         // Registry to entt
@@ -18,7 +25,8 @@ int main(int argn, char** argv) {
         // Canvas, Mouse, keyboard, Joystick, gamepad, view's
         g_service_locator.registerService(std::make_shared<Event>());
         g_service_locator.registerService(std::make_shared<Keyboard>());
-        g_service_locator.registerService(std::make_shared<CanvasFB>("Raycasting", 1200, 800, false));
+        // g_service_locator.registerService(std::make_shared<Pad>());
+        g_service_locator.registerService(std::make_shared<CanvasFB>("Raycasting", 1920 / 2, 1080 / 2, false));
         // g_service_locator.registerService(std::make_shared<ViewProjection>()); // not used but necessary
 
         // Engine
