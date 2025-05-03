@@ -3,6 +3,7 @@
 #include "mechanical/core/engine.hpp"
 #include "mechanical/core/global.hpp"
 #include "mechanical/core/keyboard.hpp"
+#include "mechanical/core/mouse.hpp"
 #include "mechanical/core/pad.hpp"
 #include <config_params.hpp>
 #include <iostream>
@@ -25,6 +26,7 @@ int main(int argn, char** argv) {
         // Canvas, Mouse, keyboard, Joystick, gamepad, view's
         g_service_locator.registerService(std::make_shared<Event>());
         g_service_locator.registerService(std::make_shared<Keyboard>());
+        g_service_locator.registerService(std::make_shared<Mouse>());
         // g_service_locator.registerService(std::make_shared<Pad>());
         g_service_locator.registerService(std::make_shared<CanvasFB>("Raycasting", 1920 / 2, 1080 / 2, false));
         // g_service_locator.registerService(std::make_shared<ViewProjection>()); // not used but necessary

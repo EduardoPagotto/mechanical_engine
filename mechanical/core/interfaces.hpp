@@ -29,7 +29,7 @@ class ICanva : public IService {
 class IMouse : public IService {
   public:
     virtual ~IMouse() noexcept = default;
-    virtual const uint8_t getButtonState(const uint8_t& indice) noexcept = 0;
+    virtual const bool getButtonState(const uint8_t& indice) noexcept = 0;
     virtual const glm::ivec2 getMove() const noexcept = 0;
     virtual const glm::ivec2 getMoveRel() noexcept = 0;
     virtual const bool getEvent(const SDL_Event& event) noexcept = 0;
