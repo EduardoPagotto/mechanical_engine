@@ -45,7 +45,7 @@ class Pad : public ServiceBase<IPad> {
 
   private:
     void added(void) {
-
+        // TODO: TESTA GAMEPAD
         int i, num_joysticks;
         SDL_JoystickID* joysticks = SDL_GetGamepads(&num_joysticks);
         if (joysticks) {
