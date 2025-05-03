@@ -24,3 +24,4 @@ make
 ## refs:
 - https://solhsa.com/gp2/index.html
 - https://wiki.libsdl.org/SDL3/README/migration
+- https://glusoft.com/sdl3-tutorials/use-opengl-shaders

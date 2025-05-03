@@ -11,6 +11,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 add_subdirectory(configured)
 
 # make app
+add_subdirectory(mechanical/src/gl)
 add_subdirectory(src)
 add_subdirectory(examples)
 

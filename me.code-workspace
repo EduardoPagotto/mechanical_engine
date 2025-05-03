@@ -146,7 +146,7 @@
 				"type": "lldb",
 				"request": "launch",
 				"name": "Debug app",
-				"program": "${workspaceFolder}/bin/template_cpp",
+				"program": "${workspaceFolder}/bin/simplesSDL3",
 				"args": [],
 				"cwd": "${workspaceFolder}"
 			},
@@ -155,6 +155,14 @@
 				"type": "lldb",
 				"request": "launch",
 				"program": "${workspaceFolder}/bin/raycasting",
+				"args": [],
+				"cwd": "${workspaceFolder}"
+			},
+			{
+				"name": "template_gl",
+				"type": "lldb",
+				"request": "launch",
+				"program": "${workspaceFolder}/bin/template_gl",
 				"args": [],
 				"cwd": "${workspaceFolder}"
 			},
