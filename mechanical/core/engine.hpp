@@ -1,6 +1,5 @@
 #pragma once
 #include "events.hpp"
-#include "global.hpp"
 #include "interfaces.hpp"
 #include "state_stack.hpp"
 #include "timer.hpp"

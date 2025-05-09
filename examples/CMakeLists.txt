@@ -1,2 +1,3 @@
 add_subdirectory(raycasting)
 add_subdirectory(template_gl)
+add_subdirectory(entity_test)

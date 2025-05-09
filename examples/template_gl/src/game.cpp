@@ -1,6 +1,5 @@
 #include "game.hpp"
 #include "mechanical/core/events.hpp"
-#include "mechanical/core/global.hpp"
 #include "mechanical/gl/OpenGLDefs.hpp"
 
 Game::Game() : IStateMachine("Game") {

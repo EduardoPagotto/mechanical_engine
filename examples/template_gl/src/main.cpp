@@ -1,6 +1,5 @@
 #include "game.hpp"
 #include "mechanical/core/engine.hpp"
-#include "mechanical/core/global.hpp"
 #include "mechanical/gl/canvas_gl.hpp"
 // #include "mechanical/core/joystick.hpp"
 #include "mechanical/core/keyboard.hpp"
@@ -19,9 +18,6 @@ int main() {
 
         SDL_SetLogPriorities(SDL_LOG_PRIORITY_DEBUG);
         SDL_Log("Simples Teste");
-
-        // Registry to entt
-        // auto reg = std::make_shared<Registry>();
 
         // Services shared inside all parts
         // Canvas, Mouse, keyboard, Joystick, gamepad, view's

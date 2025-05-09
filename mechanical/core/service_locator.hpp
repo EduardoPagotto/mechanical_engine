@@ -70,4 +70,7 @@ class ServiceLocator {
         return std::static_pointer_cast<T>(it->second);
     }
 };
+
+/// @brief Global access to ServiceLocator
+inline ServiceLocator g_service_locator;
 } // namespace me

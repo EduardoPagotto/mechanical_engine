@@ -1,7 +1,6 @@
 #include "game.hpp"
 #include "mechanical/core/canvas_fb.hpp"
 #include "mechanical/core/engine.hpp"
-#include "mechanical/core/global.hpp"
 // #include "mechanical/core/joystick.hpp"
 #include "mechanical/core/keyboard.hpp"
 #include "mechanical/core/mouse.hpp"

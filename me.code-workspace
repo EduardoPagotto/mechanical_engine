@@ -136,7 +136,12 @@
 			"memory": "cpp",
 			"format": "cpp",
 			"future": "cpp",
-			"istream": "cpp"
+			"istream": "cpp",
+			"coroutine": "cpp",
+			"memory_resource": "cpp",
+			"chrono": "cpp",
+			"typeindex": "cpp",
+			"typeinfo": "cpp"
 		},
 	},
 	"launch": {
@@ -166,6 +171,14 @@
 				"args": [],
 				"cwd": "${workspaceFolder}"
 			},
+			{
+				"name": "entity_test",
+				"type": "lldb",
+				"request": "launch",
+				"program": "${workspaceFolder}/bin/entity_test",
+				"args": [],
+				"cwd": "${workspaceFolder}"
+			}
 		],
 		"compounds": []
 	}
