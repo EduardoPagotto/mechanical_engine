@@ -4,7 +4,7 @@ namespace me {
 
 RenderBuffer::RenderBuffer(const uint32_t& posX, const uint32_t& posY, std::shared_ptr<FrameBuffer> fb,
                            std::shared_ptr<Shader> shader)
-    : posX(posX), posY(posY), shader(shader), frameBuffer(fb), vbo(nullptr) {
+    : posX(posX), posY(posY), shader(shader), vbo(nullptr), frameBuffer(fb) {
 
     SDL_LogDebug(SDL_LOG_CATEGORY_RENDER, "Render Framebuffer position(%d x %d) size(%d x %d)", posX, posY,
                  fb->getWidth(), fb->getHeight());
@@ -37,7 +37,7 @@ void RenderBuffer::render() {
     frameBuffer->getColorAttachemnt(0)->bind(0); // getTexture()->bind(0);
 
     // Set our "renderedTexture" sampler to user Texture Unit 0
-    shader->setUniformU("renderedTexture", UValue(0));
+    shader->setUniformU("renderedTexture", Uniform(0));
 
     vbo->bind();
     // Draw the triangles !

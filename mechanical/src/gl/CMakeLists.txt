@@ -18,6 +18,7 @@ set (source_dir canvas_gl.cpp
 				buffer/index_buffer.cpp
 				buffer/vertex_array.cpp
 				buffer/frame_buffer.cpp
+				buffer/render_buffer.cpp
 )
 
 # Define o Target

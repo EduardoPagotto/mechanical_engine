@@ -21,6 +21,6 @@ class RenderBuffer {
     void unbind() { frameBuffer->unbind(); }
     inline const uint32_t getWidth() const { return frameBuffer->getWidth(); }
     inline const uint32_t getHeight() const { return frameBuffer->getHeight(); }
-    // inline FrameBuffer* getFramBuffer() const { return frameBuffer; }
+    inline std::shared_ptr<FrameBuffer> getFramBuffer() const { return frameBuffer; }
 };
 } // namespace me

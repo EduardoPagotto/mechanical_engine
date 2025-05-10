@@ -6,6 +6,7 @@
 // #include "mechanical/core/mouse.hpp"
 // #include "mechanical/core/pad.hpp"
 #include "mechanical/gl/shader_manager.hpp"
+#include "mechanical/gl/texture_manager.hpp"
 #include <config_params.hpp>
 #include <iostream>
 #include <string>
@@ -29,6 +30,7 @@ int main() {
         // g_service_locator.registerService(std::make_shared<Joystick>());
         //  g_service_locator.registerService(std::make_shared<Pad>());
         g_service_locator.registerService(std::make_shared<ShaderMng>());
+        g_service_locator.registerService(std::make_shared<TextureMng>());
 
         g_service_locator.registerService(std::make_shared<CanvasGL>("TESTE GL", 1920 / 2, 1080 / 2, false));
 

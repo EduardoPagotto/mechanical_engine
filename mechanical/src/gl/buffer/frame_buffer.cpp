@@ -21,7 +21,7 @@ static bool isDepthFormat(TexFormat format) {
 
 static const uint32_t maxFrameBufferSize = 8192;
 
-FrameBuffer::FrameBuffer(const FrameBufferSpecification& spec) : spec(spec), framBufferID(0), rbo(0) {
+FrameBuffer::FrameBuffer(const FrameBufferSpecification& spec) : framBufferID(0), rbo(0), spec(spec) {
 
     Aux::textureParameterSetUndefined(rboSpec);
     Aux::textureParameterSetUndefined(depthTexSpec);
@@ -52,9 +52,8 @@ void FrameBuffer::destroy() {
 
         if (!colorAttachments.empty()) {
             for (size_t i = 0; i < colorAttachments.size(); i++) {
-                Texture* tex = colorAttachments[i];
-                delete tex;
-                tex = 0;
+                auto tex = colorAttachments[i];
+                tex.reset();
             }
         }
 
@@ -83,7 +82,7 @@ void FrameBuffer::invalidade() {
         for (const TexParam& textureParam : colorTexSpecs) {
             // const TexParam& textureParam = cas.textureParameters;
 
-            Texture* texture = new Texture(spec.width, spec.height, textureParam);
+            auto texture = std::make_shared<Texture>(spec.width, spec.height, textureParam);
             colorAttachments.emplace_back(texture);
 
             const uint32_t tId = texture->getTextureID();
@@ -106,7 +105,7 @@ void FrameBuffer::invalidade() {
     // depth Texture
     if (!Aux::textureParameterIsUndefined(depthTexSpec)) {
 
-        depthAttachment = new Texture(spec.width, spec.height, depthTexSpec);
+        depthAttachment = std::make_shared<Texture>(spec.width, spec.height, depthTexSpec);
 
         GLfloat borderColor[] = {1.0, 1.0, 1.0, 1.0};
         glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
