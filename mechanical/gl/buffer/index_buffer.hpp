@@ -5,8 +5,8 @@ namespace me {
 
 class IndexBuffer {
   private:
-    uint32_t bufferID = 0;
-    uint32_t size = 0;
+    uint32_t bufferID{0};
+    uint32_t size{0};
 
   public:
     IndexBuffer(uint32_t* data, const uint32_t& size);

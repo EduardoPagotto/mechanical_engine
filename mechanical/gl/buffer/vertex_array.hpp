@@ -1,20 +1,21 @@
 #pragma once
 #include "vertex_buffer.hpp"
+#include <memory>
 
 namespace me {
 
 class VertexArray {
   private:
-    uint32_t arrayID = 0;
-    std::vector<VertexBuffer*> vbos;
+    uint32_t arrayID{0};
+    std::vector<std::shared_ptr<VertexBuffer>> vbos;
 
   public:
     VertexArray();
     virtual ~VertexArray();
     void bind() const;
     static void unbind();
-    inline void push(VertexBuffer* buffer) { this->vbos.push_back(buffer); }
-    inline VertexBuffer* getBuffer(const uint32_t& index) const { return vbos[index]; }
-    inline VertexBuffer* getLast() const { return vbos.back(); }
+    inline void push(std::shared_ptr<VertexBuffer> buffer) { this->vbos.push_back(buffer); }
+    inline std::shared_ptr<VertexBuffer> getBuffer(const uint32_t& index) const { return vbos[index]; }
+    inline std::shared_ptr<VertexBuffer> getLast() const { return vbos.back(); }
 };
 } // namespace me

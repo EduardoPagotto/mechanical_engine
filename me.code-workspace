@@ -8,6 +8,11 @@
 		// open file with double click only
 		"workbench.editor.enablePreview": false,
 		"workbench.list.openMode": "doubleClick",
+		"workbench.colorCustomizations": {
+			//"editorCursor.background": "#ff0000",
+			"editorCursor.foreground": "#ffff00",
+			"terminalCursor.foreground": "#ffff00"
+		},
 		// Remove editor distractions
 		"editor.cursorBlinking": "blink",
 		"editor.hover.enabled": false, // hover manual crt+k, crt+i

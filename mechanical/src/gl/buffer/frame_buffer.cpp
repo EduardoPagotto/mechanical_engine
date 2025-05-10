@@ -1,5 +1,5 @@
-#include "mechanica/gl/buffer/frame_buffer.hpp"
-#include "mechanica/gl/OpenGLDefs.hpp"
+#include "mechanical/gl/buffer/frame_buffer.hpp"
+#include "mechanical/gl/OpenGLDefs.hpp"
 
 namespace me {
 

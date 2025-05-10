@@ -6,20 +6,22 @@
 namespace me {
 
 struct BufferElement {
-    uint16_t count;
-    uint16_t type;
-    uint16_t sizeOfType;
-    bool normalized;
-    uint64_t offset;
+    uint16_t count{0};
+    uint16_t type{0};
+    uint16_t sizeOfType{0};
+    bool normalized{false};
+    uint64_t offset{0};
+    BufferElement() = default;
 };
 
 class BufferLayout {
   private:
-    uint16_t size = 0;
+    uint16_t size{0};
     std::vector<BufferElement> layout;
 
   public:
     BufferLayout() = default;
+
     virtual ~BufferLayout() = default;
 
     template <typename T>
@@ -31,6 +33,7 @@ class BufferLayout {
     }
 
     inline const std::vector<BufferElement>& getLayout() const { return layout; }
+
     inline uint getStride() const { return size; }
 
   private:

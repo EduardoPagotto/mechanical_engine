@@ -14,6 +14,10 @@ set (include_dir ${CMAKE_SOURCE_DIR}
 set (source_dir canvas_gl.cpp
 				shader.cpp
 				shader_manager.cpp
+				texture.cpp
+				buffer/index_buffer.cpp
+				buffer/vertex_array.cpp
+				buffer/frame_buffer.cpp
 )
 
 # Define o Target

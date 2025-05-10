@@ -1,6 +1,6 @@
 #pragma once
 #include "buffer_layout.hpp"
-#include "mechanical_engine/gl/OpenGLDefs.hpp"
+#include "mechanical/gl/OpenGLDefs.hpp"
 
 namespace me {
 
@@ -10,8 +10,8 @@ enum class BufferType { STATIC = GL_STATIC_DRAW, DYNAMIC = GL_DYNAMIC_DRAW, STRE
 
 class VertexBuffer {
   private:
-    uint32_t bufferID = 0;
-    uint32_t sizeTotal = 0;
+    uint32_t bufferID{0};
+    uint32_t sizeTotal{0};
     BufferLayout layout;
     BufferType type;
 

@@ -1,5 +1,5 @@
 #include "mechanical/gl/buffer/index_buffer.hpp"
-#include "mechanical/gl/gl/OpenGLDefs.hpp"
+#include "mechanical/gl/OpenGLDefs.hpp"
 
 namespace me {
 

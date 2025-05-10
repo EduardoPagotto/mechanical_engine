@@ -6,12 +6,7 @@ namespace me {
 VertexArray::VertexArray() { glGenVertexArrays(1, &arrayID); }
 
 VertexArray::~VertexArray() {
-
-    for (int i = 0; i < vbos.size(); i++)
-        delete vbos[i];
-
     vbos.clear();
-
     glDeleteVertexArrays(1, &arrayID);
 }
 
