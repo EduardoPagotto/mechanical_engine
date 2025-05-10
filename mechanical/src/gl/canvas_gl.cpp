@@ -25,6 +25,10 @@ CanvasGL::CanvasGL(const std::string& title, int width, int height, bool fullScr
     if (!context)
         throw std::string("create context:" + std::string(SDL_GetError()));
 
+    if (not SDL_GL_MakeCurrent(window, context)) {
+        throw std::string("MakeCurrent:" + std::string(SDL_GetError()));
+    }
+
     // Swap buffer interval // FIXME: PRECISO ??
     if (int interval = SDL_GL_SetSwapInterval(1); interval < 0)
         throw std::string("SetSwapInterval:" + std::string(SDL_GetError()));

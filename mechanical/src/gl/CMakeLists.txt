@@ -6,13 +6,14 @@ find_package(GLEW REQUIRED)
 
 # define os includes
 set (include_dir ${CMAKE_SOURCE_DIR}
-				 ${SDL2_INCLUDE_DIR}
+				 ${SDL3_INCLUDE_DIR}
 				 ${OPENGL_INCLUDE_DIR}
-				 ${PUGIXML_DIR}
 				 ${GLEW_INCLUDE_DIRS})
 
 # define objetos a compilar
 set (source_dir canvas_gl.cpp
+				shader.cpp
+				shader_manager.cpp
 )
 
 # Define o Target

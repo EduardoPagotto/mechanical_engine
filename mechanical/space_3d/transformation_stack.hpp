@@ -4,7 +4,12 @@
 
 namespace me {
 
+// TODO: porque nao usar ITransformation ?
 class TransformationStack {
+  private:
+    std::vector<glm::mat4> transformationStack;
+    const glm::mat4* transCache;
+
   public:
     TransformationStack() {
         transformationStack.push_back(glm::mat4(1.0f));
@@ -34,9 +39,5 @@ class TransformationStack {
     }
 
     inline glm::mat4 const get() const { return *transCache; }
-
-  private:
-    std::vector<glm::mat4> transformationStack;
-    const glm::mat4* transCache;
 };
 } // namespace me

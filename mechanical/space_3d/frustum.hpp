@@ -11,8 +11,11 @@ class Frustum {
 
   public:
     explicit Frustum() noexcept = default;
+
     explicit Frustum(const Frustum& o) = delete;
+
     Frustum& operator=(Frustum& o) = delete;
+
     virtual ~Frustum() noexcept = default;
 
     void set(const glm::mat4& vpmi) noexcept {                           // ViewProjectionMatrixInverse

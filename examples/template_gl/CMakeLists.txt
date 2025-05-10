@@ -13,9 +13,9 @@ set(include_dir ${CMAKE_CURRENT_SOURCE_DIR}/include
                 ${CMAKE_SOURCE_DIR}
 )
 
-set(libs_def ${CMAKE_SOURCE_DIR}/bin/libmechanicalGL.a
-             ${OPENGL_LIBRARIES}
+set(libs_def ${OPENGL_LIBRARIES}
              ${GLEW_LIBRARIES}
+             ${CMAKE_SOURCE_DIR}/bin/libmechanicalGL.a
              -lSDL3
              -lpthread
 )
