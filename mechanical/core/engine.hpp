@@ -4,6 +4,8 @@
 #include "state_stack.hpp"
 #include "timer.hpp"
 
+constexpr uint32_t miniumCountDelta = 1000 / 140;
+
 namespace me {
 
 /// @brief Engine
@@ -43,8 +45,8 @@ class Engine {
     void run() {
         SDL_Event event;
         bool kill{false}, pause{true};
-        uint32_t beginCount{0}, countDelta{7}, miniumCountDelta{1000 / 140}; // 140 frames em 1000 ms
-        double ts{(double)countDelta / 1000.0f};
+        uint32_t beginCount{0}, countDelta{7};
+        double ts{0.0f};
 
         while (!kill) {
             beginCount = SDL_GetTicks();
@@ -52,16 +54,16 @@ class Engine {
                 switch (event.type) {
                     case SDL_EVENT_USER: {
 
-                        switch (event.user.code) {
-                            case EVENT_FLOW_PAUSE: {
+                        switch (static_cast<EventME>(event.user.code)) {
+                            case EventME::FLOW_PAUSE: {
                                 pause = true;
                                 SDL_LogDebug(SDL_LOG_CATEGORY_APPLICATION, "Paused Receive");
                             } break;
-                            case EVENT_FLOW_RESUME: {
+                            case EventME::FLOW_RESUME: {
                                 pause = false;
                                 SDL_LogDebug(SDL_LOG_CATEGORY_APPLICATION, "Resume Receive");
                             } break;
-                            case EVENT_FLOW_STOP: {
+                            case EventME::FLOW_STOP: {
                                 SDL_Event l_eventQuit;
                                 l_eventQuit.type = SDL_EVENT_QUIT;
                                 if (!SDL_PushEvent(&l_eventQuit)) {
@@ -69,7 +71,7 @@ class Engine {
                                                  SDL_GetError());
                                 }
                             } break;
-                            case EVENT_TOGGLE_FULL_SCREEN:
+                            case EventME::TOGGLE_FULL_SCREEN:
                                 canvas->toggleFullScreen();
                                 break;
                             default:
@@ -108,7 +110,7 @@ class Engine {
 
             if (timerFPS.stepCount() == true) { // count FPS each second
                 fps = timerFPS.getCountStep();
-                evenMng->send(EVENT_NEW_FPS, (void*)&fps, nullptr);
+                evenMng->send(EventME::NEW_FPS, (void*)&fps, nullptr);
                 // utilSendEvent(EVENT_NEW_FPS, (void*)&fps, nullptr);
             }
 

@@ -43,10 +43,10 @@ bool Game::onEvent(const SDL_Event& event) {
 
     switch (event.type) {
         case SDL_EVENT_WINDOW_MOUSE_ENTER:
-            evenMng->send(me::EVENT_FLOW_RESUME, nullptr, nullptr); // isPaused = false;
+            evenMng->send(EventME::FLOW_RESUME, nullptr, nullptr); // isPaused = false;
             break;
         case SDL_EVENT_WINDOW_MOUSE_LEAVE:
-            evenMng->send(me::EVENT_FLOW_PAUSE, nullptr, nullptr); // isPaused = true;
+            evenMng->send(EventME::FLOW_PAUSE, nullptr, nullptr); // isPaused = true;
             break;
     }
     return true;
@@ -56,12 +56,12 @@ void Game::onUpdate(const double& ts) {
     using namespace me;
 
     if (keyboard->isPressed(SDLK_ESCAPE)) {
-        evenMng->send(me::EVENT_FLOW_STOP, nullptr, nullptr);
+        evenMng->send(EventME::FLOW_STOP, nullptr, nullptr);
         return;
     }
 
     if (keyboard->isPressed(SDLK_F10)) {
-        evenMng->send(me::EVENT_TOGGLE_FULL_SCREEN, nullptr, nullptr);
+        evenMng->send(EventME::TOGGLE_FULL_SCREEN, nullptr, nullptr);
         return;
     }
 

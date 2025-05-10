@@ -1,29 +1,19 @@
 #pragma once
+#include "interfaces.hpp"
 #include <SDL3/SDL.h>
 
 namespace me {
-
-/// @brief Events
-const int32_t EVENT_TOGGLE_FULL_SCREEN = 0x0001; // FullScreem
-const int32_t EVENT_FLOW_PAUSE = 0x0002;         // set to pause game
-const int32_t EVENT_FLOW_RESUME = 0x0003;        // set to resume game
-const int32_t EVENT_FLOW_STOP = 0x0004;          // run finalize game
-const int32_t EVENT_NEW_FPS = 0x0005;            // OFF_COLLIDE
-const int32_t EVENT_COLLIDE_IS_ALLOW = 0x1000;   // IS_ALLOW_COLLIDE
-const int32_t EVENT_COLLIDE_START = 0x1001;      // START_COLLIDE
-const int32_t EVENT_COLLIDE_ON = 0x1002;         // ON_COLLIDE
-const int32_t EVENT_COLLIDE_OFF = 0x1003;        // OFF_COLLIDE
 
 class Event : public ServiceBase<IEvent> {
   public:
     Event() noexcept = default;
     virtual ~Event() noexcept override = default;
 
-    virtual void send(const int32_t& user_event, void* _paramA, void* _paramB) override {
+    virtual void send(const EventME& user_event, void* _paramA, void* _paramB) override {
         SDL_Event event;
         SDL_zero(event);
         event.type = SDL_EVENT_USER;
-        event.user.code = user_event;
+        event.user.code = static_cast<Sint32>(user_event);
         event.user.data1 = _paramA;
         event.user.data2 = _paramB;
         if (SDL_PushEvent(&event) == false) {
@@ -31,5 +21,4 @@ class Event : public ServiceBase<IEvent> {
         }
     }
 };
-
 } // namespace me

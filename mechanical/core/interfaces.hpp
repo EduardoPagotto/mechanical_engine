@@ -1,5 +1,6 @@
 #pragma once
 #include "service_locator.hpp"
+#include "types_base.hpp"
 #include <SDL3/SDL.h>
 #include <glm/glm.hpp>
 
@@ -77,7 +78,7 @@ class IPad : public IService {
 class IEvent : public IService {
   public:
     virtual ~IEvent() noexcept = default;
-    virtual void send(const int32_t& user_event, void* _paramA, void* _paramB) = 0;
+    virtual void send(const EventME& user_event, void* _paramA, void* _paramB) = 0;
 };
 
 /// @brief State Machine Interface
