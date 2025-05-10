@@ -68,8 +68,8 @@ Shader::~Shader() noexcept {
 
 const int32_t Shader::getUniform(const std::string& name) const noexcept {
 
-    if (uniformLocationCache.find(name) != uniformLocationCache.end())
-        return uniformLocationCache[name];
+    if (auto search = uniformLocationCache.find(name); search != uniformLocationCache.end())
+        return search->second;
 
     int32_t loc = glGetUniformLocation(progID, name.c_str());
     uniformLocationCache[name] = loc;
