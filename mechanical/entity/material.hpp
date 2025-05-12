@@ -1,4 +1,5 @@
 #pragma once
+#include "mechanical/core/types_base.hpp"
 #include "mechanical/core/uniform_value.hpp"
 
 namespace me {

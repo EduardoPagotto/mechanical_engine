@@ -1,5 +1,5 @@
 #pragma once
-#include "types_base.hpp"
+#include "mechanical/core/types_base.hpp"
 #include <entt/entt.hpp>
 #include <stdexcept>
 

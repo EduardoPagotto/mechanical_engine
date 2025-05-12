@@ -1,7 +1,7 @@
-#include "mechanical/core/entity.hpp"
-#include "mechanical/core/material.hpp"
-#include "mechanical/core/mesh.hpp"
-#include "mechanical/core/tex.hpp"
+#include "mechanical/entity/entity.hpp"
+#include "mechanical/entity/material.hpp"
+#include "mechanical/entity/mesh.hpp"
+#include "mechanical/entity/tex.hpp"
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
 #include <config_params.hpp>
