@@ -1,13 +1,9 @@
 #pragma once
+#include "types_base.hpp"
 #include <entt/entt.hpp>
 #include <stdexcept>
 
 namespace me {
-
-struct TagInfo {
-    std::string name = "";
-    std::string id = "";
-};
 
 class Registry {
 
@@ -27,6 +23,22 @@ class Registry {
     entt::registry& get() { return eRegistry; }
 
     // std::type_index getTypeIndex() const { return std::type_index(typeid(Registry)); }
+
+    entt::entity findEntity(const std::string& tag, bool isName = true) {
+        auto view = eRegistry.view<TagInfo>();
+        for (auto ent : view) {
+            TagInfo& ee = eRegistry.get<TagInfo>(ent);
+            if (isName) {
+                if (ee.name == tag)
+                    return ent;
+            } else {
+                if (ee.id == tag)
+                    return ent;
+            }
+        }
+
+        return entt::null;
+    }
 
     template <typename T>
     T& findComponent(const std::string& tag, bool isName = true) {

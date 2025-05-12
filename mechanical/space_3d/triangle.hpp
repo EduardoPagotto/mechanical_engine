@@ -1,6 +1,5 @@
 #pragma once
 #include <glm/glm.hpp>
-#include <vector>
 
 namespace me {
 struct Triangle {
@@ -13,6 +12,4 @@ struct Triangle {
     explicit Triangle(const glm::uvec3& i, const glm::vec3& n, const bool& s) noexcept
         : idx(i), normal(n), splitter(s) {}
 };
-
-using TrisIndex = std::vector<glm::uvec3>;
 } // namespace me

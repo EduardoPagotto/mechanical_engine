@@ -12,13 +12,16 @@ class Entity {
     Entity(const Entity& other) : handle(other.handle) {}
 
     Entity(const std::string& name, const std::string& id) {
-
         handle = g_registry.get().create();
-        // auto& ec =
         this->addComponent<TagInfo>(TagInfo{name, id});
-        // ec.name = name;
-        // ec.id = id;
     }
+
+    Entity(entt::entity novo) : handle(novo) {}
+
+    // Entity& operator=(const entt::entity& other) {
+    //     this->handle = other;
+    //     return *this;
+    // }
 
     void destroy() {
         { g_registry.get().destroy(handle); }
