@@ -1,3 +1,4 @@
+#include "mechanical/entity/camera.hpp"
 #include "mechanical/entity/entity.hpp"
 #include "mechanical/entity/material.hpp"
 #include "mechanical/entity/mesh.hpp"
@@ -19,8 +20,23 @@ int main() {
         SDL_Log("Simples Teste");
 
         Entity eObj2 = Entity("Obj_02", "Obj_02");
+        CameraControllerFPS& crt1 = eObj2.addComponent<CameraControllerFPS>();
+        crt1.cam = std::make_shared<CameraOrtho>(100.0f, 100.0f, 0.1f, 100.0f);
+        crt1.up = glm::vec3(0, -1, 0);
+        crt1.yaw = 90.0f;
+        crt1.pitch = 0.0f;
+        crt1.enable = true; // primary
+        crt1.fixed = false;
 
         Entity eObj = Entity("Obj_01", "Obj_01");
+        CameraComntrollerOrbit& crt2 = eObj.addComponent<CameraComntrollerOrbit>();
+        crt2.cam = std::make_shared<CameraPerspective>(45.0f, 0.1f, 100.0f);
+        crt2.up = glm::vec3(0, -1, 0);
+        crt2.yaw = 90.0f;
+        crt2.pitch = 0.0f;
+        crt2.enable = true; // primary
+        crt2.min = 0.1f;
+        crt2.max = 1000.0f;
 
         Entity eObj3 = Entity("Obj_03", "Obj_03");
         { // teste
