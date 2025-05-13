@@ -19,7 +19,7 @@ struct Mesh3d {
     TagInfo tag;
     MeshType type{MeshType::SINGLE};
     std::vector<Vertex3d> vVertex; // TrisIndex iFace; antigo!!!
-    std::vector<TrisIndex> vFaces;
+    std::vector<TrisIndex> vFaces; // 0 para mesh simples, varios valores para trees
 };
 
 // struct MeshComponent {
