@@ -1,6 +1,5 @@
 #pragma once
-// #include "chimera/core/ViewProjection.hpp"
-#include "mechanical/core/types_base.hpp" //"chimera/core/TagComponent.hpp"
+#include "mechanical/core/types_base.hpp"
 #include <glm/gtc/matrix_transform.hpp>
 #include <memory>
 
@@ -63,45 +62,19 @@ class CameraPerspective : public Camera {
     }
 };
 
-struct CameraControllerFPS {
+enum class CameraType {
+    ORTHO,
+    PERSPECTIVE,
+};
+
+struct CameraData {
     // TagInfo tag;
     std::shared_ptr<Camera> cam;
-    float pitch{0.0f}, yaw{90.0f};
+    CameraType type{CameraType::PERSPECTIVE};
+    float pitch{0.0f}, yaw{90.0f}, min{0.1f}, max{1000.0f};
     bool enable{false}; // primary
     bool fixed{false};  // fixedAspectRatio
     glm::vec3 up{glm::vec3(0, 1, 0)};
 };
 
-struct CameraComntrollerOrbit {
-    std::shared_ptr<Camera> cam;
-    float pitch{0.0f}, yaw{90.0f}, min{0.1f}, max{1000.0f};
-    bool enable{false}; // primary
-    glm::vec3 up{glm::vec3(0, 1, 0)};
-};
-
-struct CameraComponent {
-    TagInfo tag;
-    Camera* camera{nullptr};
-    bool primary{true};
-    bool fixedAspectRatio{false};
-    // CamKind camKind = CamKind::STATIC;
-    float pitch{0.0f}, yaw{90.0f}, min{0.5f}, max{1000.0f};
-    glm::vec3 up{glm::vec3(0, 1, 0)};
-
-    CameraComponent() = default;
-    CameraComponent(const CameraComponent& o) = default;
-};
-
-// struct CameraComponent {
-//     TagInfo tag;
-//     Camera* camera{nullptr};
-//     bool primary{true};
-//     bool fixedAspectRatio{false};
-//     // CamKind camKind = CamKind::STATIC;
-//     float pitch{0.0f}, yaw{90.0f}, min{0.5f}, max{1000.0f};
-//     glm::vec3 up{glm::vec3(0, 1, 0)};
-
-//     CameraComponent() = default;
-//     CameraComponent(const CameraComponent& o) = default;
-// };
 } // namespace me

@@ -20,8 +20,9 @@ int main() {
         SDL_Log("Simples Teste");
 
         Entity eObj2 = Entity("Obj_02", "Obj_02");
-        CameraControllerFPS& crt1 = eObj2.addComponent<CameraControllerFPS>();
+        CameraData& crt1 = eObj2.addComponent<CameraData>();
         crt1.cam = std::make_shared<CameraOrtho>(100.0f, 100.0f, 0.1f, 100.0f);
+        crt1.type = CameraType::ORTHO;
         crt1.up = glm::vec3(0, -1, 0);
         crt1.yaw = 90.0f;
         crt1.pitch = 0.0f;
@@ -29,8 +30,9 @@ int main() {
         crt1.fixed = false;
 
         Entity eObj = Entity("Obj_01", "Obj_01");
-        CameraComntrollerOrbit& crt2 = eObj.addComponent<CameraComntrollerOrbit>();
+        CameraData& crt2 = eObj.addComponent<CameraData>();
         crt2.cam = std::make_shared<CameraPerspective>(45.0f, 0.1f, 100.0f);
+        crt2.type = CameraType::PERSPECTIVE;
         crt2.up = glm::vec3(0, -1, 0);
         crt2.yaw = 90.0f;
         crt2.pitch = 0.0f;
