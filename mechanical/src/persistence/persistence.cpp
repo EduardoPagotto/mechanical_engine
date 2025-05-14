@@ -1,8 +1,8 @@
 // #include "chimera/core/gl/TextureMng.hpp"
 // #include "chimera/core/utils.hpp"
 #include "mechanical/persistence/persistence.hpp"
+#include "mechanical/ecs/mesh_component.hpp"
 #include "mechanical/entity/material.hpp"
-#include "mechanical/entity/mesh.hpp"
 #include "mechanical/gl/file_utils.hpp"
 #include "mechanical/gl/tex.hpp"
 #include "mechanical/gl/texture_manager.hpp"
@@ -48,7 +48,7 @@ static glm::vec4 tokensToVec4(std::vector<std::string>& textData) {
 
 bool Persistence::loadObj(const std::string& pathfile, Entity entity) {
 
-    Mesh3d& mesh = entity.addComponent<Mesh3d>();
+    Mesh& mesh = entity.addComponent<Mesh>();
     // mesh.tag.name = name; //TODO: recupersr nome da entidade e adicoinar -mesh com name
     // mesh.tag.id = id;
 

@@ -1,7 +1,7 @@
 #include "mechanical/ecs/camera_component.hpp"
 #include "mechanical/ecs/entity.hpp"
+#include "mechanical/ecs/mesh_component.hpp"
 #include "mechanical/entity/material.hpp"
-#include "mechanical/entity/mesh.hpp"
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
 #include <config_params.hpp>
@@ -41,7 +41,7 @@ int main() {
 
         Entity eObj3 = Entity("Obj_03", "Obj_03");
         { // teste
-            Mesh3d& mesh = eObj.addComponent<Mesh3d>();
+            Mesh& mesh = eObj.addComponent<Mesh>();
             mesh.tag.name = "Zoltan";
             mesh.tag.id = "Zoltan-id-01";
 

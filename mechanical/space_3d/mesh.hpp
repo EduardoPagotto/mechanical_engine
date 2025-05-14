@@ -15,7 +15,7 @@ struct Vertex3d {
 
 enum class MeshType { SINGLE = 0, ARRAY = 1, TREE = 2 };
 
-struct Mesh3d {
+struct Mesh {
     TagInfo tag;
     MeshType type{MeshType::SINGLE};
     std::vector<Vertex3d> vVertex; // TrisIndex iFace; antigo!!!
