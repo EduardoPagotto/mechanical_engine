@@ -6,8 +6,8 @@
 // #include "mechanical/core/mouse.hpp"
 // #include "mechanical/core/pad.hpp"
 #include "mechanical/ecs/camera_component.hpp"
+#include "mechanical/ecs/light_component.hpp"
 #include "mechanical/ecs/shader_component.hpp"
-#include "mechanical/entity/light.hpp"
 #include "mechanical/gl/shader_manager.hpp"
 #include "mechanical/gl/texture_manager.hpp"
 #include "mechanical/persistence/persistence.hpp"
@@ -56,7 +56,7 @@ int main() {
             c.pitch = 0.0f;
 
             // light
-            Light l = entity.addComponent<Light>();
+            LightComponent l = entity.addComponent<LightComponent>();
             l.tag.name = "light1";
             l.tag.id = "light_01";
             l.vLight["light.diffuse"] = Uniform(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));

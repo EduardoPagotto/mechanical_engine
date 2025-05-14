@@ -1,7 +1,7 @@
 #include "mechanical/ecs/camera_component.hpp"
 #include "mechanical/ecs/entity.hpp"
+#include "mechanical/ecs/material_component.hpp"
 #include "mechanical/ecs/mesh_component.hpp"
-#include "mechanical/entity/material.hpp"
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
 #include <config_params.hpp>
@@ -45,7 +45,7 @@ int main() {
             mesh.tag.name = "Zoltan";
             mesh.tag.id = "Zoltan-id-01";
 
-            Material& mat = eObj.addComponent<Material>();
+            MaterialComponent& mat = eObj.addComponent<MaterialComponent>();
             mat.tag.name = "mat01";
             mat.tag.id = "mat01-id";
             mat.vMaterial["material.difuse"] = Uniform(glm::vec4(0.6f, 0.6f, 0.6f, 1.0f));
@@ -72,7 +72,7 @@ int main() {
         auto entityID = g_registry.findEntity("Obj_01");
         Entity eObjteste(entityID);
         {
-            auto hhh = eObjteste.getComponent<Material>();
+            auto hhh = eObjteste.getComponent<MaterialComponent>();
             std::cout << hhh.tag.name << std::endl;
         }
 
@@ -81,8 +81,8 @@ int main() {
             auto& tc = entity.getComponent<TagInfo>();
             SDL_Log("Tag: %s Id: %s", tc.name.c_str(), tc.id.c_str());
 
-            if (entity.hasComponent<Material>()) {
-                auto& hhh = entity.getComponent<Material>();
+            if (entity.hasComponent<MaterialComponent>()) {
+                auto& hhh = entity.getComponent<MaterialComponent>();
                 std::cout << hhh.tag.name << std::endl;
             }
         }

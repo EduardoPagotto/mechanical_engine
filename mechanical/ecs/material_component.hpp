@@ -1,10 +1,10 @@
 #pragma once
-#include "mechanical/core/types_base.hpp"
+#include "ecs.hpp"
 #include "mechanical/core/uniform_value.hpp"
+#include <memory>
 
 namespace me {
-
-struct Material {
+struct MaterialComponent {
     TagInfo tag;
     MapUniform vMaterial; // listMaterial;
 };

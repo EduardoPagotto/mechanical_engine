@@ -1,8 +1,6 @@
-// #include "chimera/core/gl/TextureMng.hpp"
-// #include "chimera/core/utils.hpp"
 #include "mechanical/persistence/persistence.hpp"
+#include "mechanical/ecs/material_component.hpp"
 #include "mechanical/ecs/mesh_component.hpp"
-#include "mechanical/entity/material.hpp"
 #include "mechanical/gl/file_utils.hpp"
 #include "mechanical/gl/tex.hpp"
 #include "mechanical/gl/texture_manager.hpp"
@@ -135,7 +133,7 @@ bool Persistence::loadObj(const std::string& pathfile, Entity entity) {
     for (uint32_t face = 0; face < iPoint.size(); face++) {
         mesh.vVertex.push_back({point[iPoint[face]],                                     // point
                                 normal[iNormal[face]],                                   // normal
-                                (uv.size() > 0) ? uv[iUv[face]] : glm::vec2(0.0, 0.0)}); // UV se nao existir zeros !!
+                                (uv.size() > 0) ? uv[iUv[face]] : glm::vec2(0.0, 0.0)}); // UV se nao existir zeros
     }
 
     mesh.vFaces.push_back(std::vector<glm::uvec3>());
@@ -161,7 +159,7 @@ bool Persistence::loadMtl(const std::string& pathfile, Entity entity) {
         return false;
     }
 
-    Material& material = entity.addComponent<Material>();
+    MaterialComponent& material = entity.addComponent<MaterialComponent>();
     // material.tag.name = "mat01";
     // material.tag.id = "mat01-id";
 
