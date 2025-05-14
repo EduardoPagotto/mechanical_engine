@@ -5,6 +5,8 @@
 #include "mechanical/core/keyboard.hpp"
 // #include "mechanical/core/mouse.hpp"
 // #include "mechanical/core/pad.hpp"
+#include "mechanical/entity/camera.hpp"
+#include "mechanical/entity/light.hpp"
 #include "mechanical/gl/shader_manager.hpp"
 #include "mechanical/gl/texture_manager.hpp"
 #include "mechanical/persistence/persistence.hpp"
@@ -33,11 +35,32 @@ int main() {
         //  g_service_locator.registerService(std::make_shared<Pad>());
         g_service_locator.registerService(std::make_shared<ShaderMng>());
         g_service_locator.registerService(std::make_shared<TextureMng>());
-
         g_service_locator.registerService(std::make_shared<CanvasGL>("TESTE GL", 1920 / 2, 1080 / 2, false));
 
         {
-            // cria luz e camera
+            // New camera and light
+            Entity entity = Entity("scene", "scene_01");
+
+            // camera
+            CameraData& c = entity.addComponent<CameraData>();
+            c.cam = std::make_shared<CameraPerspective>(45.0f, 0.1, 1000.0f);
+            c.cam->setPosition(glm::vec3(5.0f, 5.0f, 2.0f));
+            c.type = CameraType::PERSPECTIVE;
+            c.tag.name = "cam01";
+            c.tag.id = "cam_01";
+            c.up = glm::vec3(0.0f, 1.0f, 0.0f);
+            c.min = 1.0f;
+            c.max = 1500.0f;
+            c.yaw = 0.0f;
+            c.pitch = 0.0f;
+
+            // light
+            Light l = entity.addComponent<Light>();
+            l.tag.name = "light1";
+            l.tag.id = "light_01";
+            l.vLight["light.diffuse"] = Uniform(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
+            l.vLight["light.position"] = Uniform(glm::vec3(10.0f, 10.0f, 10.0f)); // FIXME: matrix ??
+            l.vLight["light.ambient"] = Uniform(glm::vec4(0.9f, 0.9f, 0.9f, 1.0f));
         }
 
         { // New Object in 3d space with: transformations; mesh; material; texture; shade;

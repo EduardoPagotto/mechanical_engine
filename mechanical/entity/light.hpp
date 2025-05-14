@@ -9,7 +9,7 @@ namespace me {
 // #define SHADE_LIGHT_DIFFUSE "light.diffuse"
 // #define SHADE_LIGHT_SPECULAR "light.specular"
 
-struct light {
+struct Light {
     TagInfo tag;
     MapUniform vLight;
 };

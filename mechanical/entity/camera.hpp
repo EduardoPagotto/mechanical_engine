@@ -68,7 +68,7 @@ enum class CameraType {
 };
 
 struct CameraData {
-    // TagInfo tag;
+    TagInfo tag;
     std::shared_ptr<Camera> cam;
     CameraType type{CameraType::PERSPECTIVE};
     float pitch{0.0f}, yaw{90.0f}, min{0.1f}, max{1000.0f};
