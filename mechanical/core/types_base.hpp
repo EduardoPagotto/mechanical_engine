@@ -16,10 +16,4 @@ enum class EventME : int32_t {
     COLLIDE_ON = 0x1002,         // ON_COLLIDE
     COLLIDE_OFF = 0x1003,        // OFF_COLLIDE
 };
-
-/// @brief Tag usser in Registry
-struct TagInfo {
-    std::string name{""};
-    std::string id{""};
-};
 } // namespace me

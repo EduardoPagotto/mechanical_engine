@@ -5,6 +5,13 @@
 
 namespace me {
 
+/// @brief Tag usser in Registry
+struct TagInfo {
+    std::string name{""};
+    std::string id{""};
+};
+
+/// @brief Resistry controller of all Global components
 class Registry {
 
   private:

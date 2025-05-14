@@ -1,5 +1,5 @@
 #pragma once
-#include "mechanical/core/service_locator.hpp"
+#include "service_locator.hpp"
 #include <array>
 #include <glm/glm.hpp>
 
