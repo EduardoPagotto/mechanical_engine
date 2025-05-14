@@ -1,8 +1,8 @@
 #include "mechanical/persistence/persistence.hpp"
 #include "mechanical/ecs/material_component.hpp"
 #include "mechanical/ecs/mesh_component.hpp"
+#include "mechanical/ecs/texture_component.hpp"
 #include "mechanical/gl/file_utils.hpp"
-#include "mechanical/gl/tex.hpp"
 #include "mechanical/gl/texture_manager.hpp"
 #include <SDL3/SDL.h>
 #include <fstream>
@@ -163,7 +163,7 @@ bool Persistence::loadMtl(const std::string& pathfile, Entity entity) {
     // material.tag.name = "mat01";
     // material.tag.id = "mat01-id";
 
-    Tex& tex = entity.addComponent<Tex>();
+    TextureComponent& tex = entity.addComponent<TextureComponent>();
     // tex.tag.name = "texname";
     // tex.tag.id = "texid";
 

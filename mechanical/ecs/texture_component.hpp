@@ -1,14 +1,14 @@
 #pragma once
-#include "mechanical/core/types_base.hpp"
-#include "texture.hpp"
+#include "ecs.hpp"
+#include "mechanical/core/uniform_value.hpp"
+#include "mechanical/gl/texture.hpp"
 #include <memory>
-#include <unordered_map>
 
 namespace me {
 
 using MapTex = std::unordered_map<std::string, std::shared_ptr<Texture>>;
 
-struct Tex {
+struct TextureComponent {
     TagInfo tag;
     MapTex vTex;
 };
