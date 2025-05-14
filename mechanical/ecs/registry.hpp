@@ -1,15 +1,9 @@
 #pragma once
-#include "mechanical/core/types_base.hpp"
+#include "ecs.hpp"
 #include <entt/entt.hpp>
 #include <stdexcept>
 
 namespace me {
-
-/// @brief Tag usser in Registry
-struct TagInfo {
-    std::string name{""};
-    std::string id{""};
-};
 
 /// @brief Resistry controller of all Global components
 class Registry {

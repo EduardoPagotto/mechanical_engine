@@ -5,7 +5,8 @@
 #include "mechanical/core/keyboard.hpp"
 // #include "mechanical/core/mouse.hpp"
 // #include "mechanical/core/pad.hpp"
-#include "mechanical/entity/camera.hpp"
+#include "mechanical/ecs/camera_component.hpp"
+#include "mechanical/ecs/shader_component.hpp"
 #include "mechanical/entity/light.hpp"
 #include "mechanical/gl/shader_manager.hpp"
 #include "mechanical/gl/texture_manager.hpp"
@@ -42,7 +43,7 @@ int main() {
             Entity entity = Entity("scene", "scene_01");
 
             // camera
-            CameraData& c = entity.addComponent<CameraData>();
+            CameraComponent& c = entity.addComponent<CameraComponent>();
             c.cam = std::make_shared<CameraPerspective>(45.0f, 0.1, 1000.0f);
             c.cam->setPosition(glm::vec3(5.0f, 5.0f, 2.0f));
             c.type = CameraType::PERSPECTIVE;
@@ -85,7 +86,7 @@ int main() {
             shader_files[GL_VERTEX_SHADER] = "./examples/template_gl/shades/vertex_shader.glsl";
             shader_files[GL_FRAGMENT_SHADER] = "./examples/template_gl/shades/blur_shader.glsl";
 
-            ShaderData& shadeData = entity.addComponent<ShaderData>();
+            ShaderComponent& shadeData = entity.addComponent<ShaderComponent>();
             shadeData.tag.name = "teste";
             shadeData.shader = mng->load("teste", shader_files);
         }

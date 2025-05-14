@@ -1,5 +1,5 @@
-#include "mechanical/entity/camera.hpp"
-#include "mechanical/entity/entity.hpp"
+#include "mechanical/ecs/camera_component.hpp"
+#include "mechanical/ecs/entity.hpp"
 #include "mechanical/entity/material.hpp"
 #include "mechanical/entity/mesh.hpp"
 #include <SDL3/SDL.h>
@@ -19,7 +19,7 @@ int main() {
         SDL_Log("Simples Teste");
 
         Entity eObj2 = Entity("Obj_02", "Obj_02");
-        CameraData& crt1 = eObj2.addComponent<CameraData>();
+        CameraComponent& crt1 = eObj2.addComponent<CameraComponent>();
         crt1.cam = std::make_shared<CameraOrtho>(100.0f, 100.0f, 0.1f, 100.0f);
         crt1.type = CameraType::ORTHO;
         crt1.up = glm::vec3(0, -1, 0);
@@ -29,7 +29,7 @@ int main() {
         crt1.fixed = false;
 
         Entity eObj = Entity("Obj_01", "Obj_01");
-        CameraData& crt2 = eObj.addComponent<CameraData>();
+        CameraComponent& crt2 = eObj.addComponent<CameraComponent>();
         crt2.cam = std::make_shared<CameraPerspective>(45.0f, 0.1f, 100.0f);
         crt2.type = CameraType::PERSPECTIVE;
         crt2.up = glm::vec3(0, -1, 0);

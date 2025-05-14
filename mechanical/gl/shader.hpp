@@ -1,5 +1,4 @@
 #pragma once
-#include "mechanical/core/types_base.hpp"
 #include "mechanical/core/uniform_value.hpp"
 
 namespace me {
@@ -29,12 +28,5 @@ class Shader {
     const int32_t getUniform(const std::string& name) const noexcept;
 
     void setUniformU(const char* name, const Uniform& uv) noexcept;
-};
-
-struct ShaderData {
-    // ShaderComponent(const std::string& name, std::shared_ptr<Shader> shader) : name(name), shader(shader) {}
-    // virtual ~ShaderComponent() = default;
-    TagInfo tag;
-    std::shared_ptr<Shader> shader;
 };
 } // namespace me

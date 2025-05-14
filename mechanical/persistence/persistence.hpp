@@ -1,5 +1,5 @@
 #pragma once
-#include "mechanical/entity/entity.hpp"
+#include "mechanical/ecs/entity.hpp"
 #include <string>
 // #include "chimera/core/gl/Material.hpp"
 // #include "chimera/core/visible/Mesh.hpp"
