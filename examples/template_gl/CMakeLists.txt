@@ -15,8 +15,10 @@ set(include_dir ${CMAKE_CURRENT_SOURCE_DIR}/include
 
 set(libs_def ${OPENGL_LIBRARIES}
              ${GLEW_LIBRARIES}
+            -lSDL3
+            -lSDL3_image
              ${CMAKE_SOURCE_DIR}/bin/libmechanicalGL.a
-             -lSDL3
+             ${CMAKE_SOURCE_DIR}/bin/libpersistenceME.a
              -lpthread
 )
 
@@ -26,4 +28,6 @@ add_executable (${PROJECT_NAME} src/main.cpp
 target_include_directories(${PROJECT_NAME} PRIVATE ${include_dir})
 target_link_libraries(${PROJECT_NAME} ${libs_def})
 
-add_dependencies(${PROJECT_NAME} mechanicalGL)
+add_dependencies(${PROJECT_NAME} mechanicalGL
+                                 persistenceME
+)

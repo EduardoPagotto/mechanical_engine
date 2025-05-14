@@ -7,6 +7,8 @@
 // #include "mechanical/core/pad.hpp"
 #include "mechanical/gl/shader_manager.hpp"
 #include "mechanical/gl/texture_manager.hpp"
+#include "mechanical/persistence/persistence.hpp"
+#include "mechanical/space_3d/transformation.hpp"
 #include <config_params.hpp>
 #include <iostream>
 #include <string>
@@ -33,6 +35,37 @@ int main() {
         g_service_locator.registerService(std::make_shared<TextureMng>());
 
         g_service_locator.registerService(std::make_shared<CanvasGL>("TESTE GL", 1920 / 2, 1080 / 2, false));
+
+        {
+            // cria luz e camera
+        }
+
+        { // New Object in 3d space with: transformations; mesh; material; texture; shade;
+            // Main object
+            Entity entity = Entity("Cubo01", "Cubo_01");
+
+            // space transformations
+            TransData& t = entity.addComponent<TransData>();
+            t.trans = std::make_shared<Transformation>();
+
+            // load Mesh, material, textura
+            Persistence p;
+            if (!p.loadObj("./assets/models/cubo2.obj", entity)) { // after register TextureMng
+                SDL_Log("Falha na carga do OBJ");
+                return -1;
+            }
+
+            // shade
+            auto mng = me::g_service_locator.getService<me::ShaderMng>();
+
+            std::unordered_map<uint32_t, std::string> shader_files;
+            shader_files[GL_VERTEX_SHADER] = "./examples/template_gl/shades/vertex_shader.glsl";
+            shader_files[GL_FRAGMENT_SHADER] = "./examples/template_gl/shades/blur_shader.glsl";
+
+            ShaderData& shadeData = entity.addComponent<ShaderData>();
+            shadeData.tag.name = "teste";
+            shadeData.shader = mng->load("teste", shader_files);
+        }
 
         // Engine
         Engine engine;

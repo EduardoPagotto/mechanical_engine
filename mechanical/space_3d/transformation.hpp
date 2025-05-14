@@ -1,5 +1,8 @@
 #pragma once
 #include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.inl>
+#include <glm/gtx/euler_angles.hpp>
 
 namespace me {
 class ITransformation {
@@ -51,6 +54,12 @@ class Transformation : public ITransformation {
     virtual void setRotation(const glm::vec3& rot) override { transform = glm::eulerAngleYXZ(rot.y, rot.x, rot.z); }
 
     virtual void setMatrix(const glm::mat4& transform) override { this->transform = transform; }
+};
+
+struct TransData {
+    TagInfo tag;
+    std::shared_ptr<ITransformation> trans;
+    bool solid{false};
 };
 
 } // namespace me

@@ -1,4 +1,4 @@
-PROJECT(mechanicalGL)
+PROJECT(persistenceME)
 
 find_package(OpenGL REQUIRED)
 find_package(SDL3 REQUIRED)
@@ -11,15 +11,7 @@ set (include_dir ${CMAKE_SOURCE_DIR}
 				 ${GLEW_INCLUDE_DIRS})
 
 # define objetos a compilar
-set (source_dir file_utils.cpp
-                canvas_gl.cpp
-				shader.cpp
-				shader_manager.cpp
-				texture.cpp
-				buffer/index_buffer.cpp
-				buffer/vertex_array.cpp
-				buffer/frame_buffer.cpp
-				buffer/render_buffer.cpp
+set (source_dir persistence.cpp
 )
 
 # Define o Target
@@ -27,3 +19,5 @@ add_library (${PROJECT_NAME} STATIC ${source_dir})
 
 # Define os includes
 target_include_directories (${PROJECT_NAME} PUBLIC ${include_dir})
+
+add_dependencies(${PROJECT_NAME} mechanicalGL)

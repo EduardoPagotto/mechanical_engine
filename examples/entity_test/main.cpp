@@ -2,7 +2,6 @@
 #include "mechanical/entity/entity.hpp"
 #include "mechanical/entity/material.hpp"
 #include "mechanical/entity/mesh.hpp"
-#include "mechanical/entity/tex.hpp"
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
 #include <config_params.hpp>
@@ -55,20 +54,20 @@ int main() {
             mat.vMaterial["material.specular"] = Uniform(glm::vec4(0.5f, 0.5f, 0.5f, 1.0f));
             mat.vMaterial["material.shine"] = Uniform(10);
 
-            Tex& tex = eObj.addComponent<Tex>();
-            tex.tag.name = "texture_01";
-            tex.tag.id = "texture_id_0";
-            tex.width = 200;
-            tex.height = 200;
-            tex.idTexture = 1;
-            tex.texParam = TexParam();
+            // Tex& tex = eObj.addComponent<Tex>();
+            // tex.tag.name = "texture_01";
+            // tex.tag.id = "texture_id_0";
+            // tex.width = 200;
+            // tex.height = 200;
+            // tex.idTexture = 1;
+            // tex.texParam = TexParam();
         }
 
-        auto group = g_registry.get().group<Mesh3d, Material, Tex>();
-        for (auto entity : group) {
-            const auto [z1, z2, z3] = group.get<Mesh3d, Material, Tex>(entity);
-            std::cout << z1.tag.name << " " << z2.tag.name << z3.tag.name << std::endl;
-        }
+        // auto group = g_registry.get().group<Mesh3d, Material>();
+        // for (auto entity : group) {
+        //     const auto [z1, z2] = group.get<Mesh3d, Material>(entity);
+        //     std::cout << z1.tag.name << " " << z2.tag.name < < < < std::endl;
+        // }
 
         auto entityID = g_registry.findEntity("Obj_01");
         Entity eObjteste(entityID);
