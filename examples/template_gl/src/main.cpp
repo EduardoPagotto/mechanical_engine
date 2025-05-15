@@ -8,6 +8,7 @@
 #include "mechanical/ecs/camera_component.hpp"
 #include "mechanical/ecs/light_component.hpp"
 #include "mechanical/ecs/shader_component.hpp"
+#include "mechanical/ecs/transformation_component.hpp"
 #include "mechanical/gl/shader_manager.hpp"
 #include "mechanical/gl/texture_manager.hpp"
 #include "mechanical/persistence/persistence.hpp"
@@ -69,7 +70,7 @@ int main() {
             Entity entity = Entity("Cubo01", "Cubo_01");
 
             // space transformations
-            TransData& t = entity.addComponent<TransData>();
+            TransformationComponent& t = entity.addComponent<TransformationComponent>();
             t.trans = std::make_shared<Transformation>();
 
             // load Mesh, material, textura

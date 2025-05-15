@@ -55,11 +55,4 @@ class Transformation : public ITransformation {
 
     virtual void setMatrix(const glm::mat4& transform) override { this->transform = transform; }
 };
-
-struct TransData {
-    TagInfo tag;
-    std::shared_ptr<ITransformation> trans;
-    bool solid{false};
-};
-
 } // namespace me
