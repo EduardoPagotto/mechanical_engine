@@ -9,13 +9,11 @@ set(include_dir ${CMAKE_SOURCE_DIR}/include
                 ${CMAKE_SOURCE_DIR}
 )
 
-set(source_dir ${CMAKE_SOURCE_DIR}/src)
-
 set(libs_def  -lSDL3
              -lpthread
 )
 
-add_executable (${PROJECT_NAME} ${source_dir}/main.cpp)
+add_executable (${PROJECT_NAME} src/main.cpp)
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${include_dir})
 target_link_libraries(${PROJECT_NAME} ${libs_def})

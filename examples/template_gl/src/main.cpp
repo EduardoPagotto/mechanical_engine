@@ -39,59 +39,6 @@ int main() {
         g_service_locator.registerService(std::make_shared<TextureMng>());
         g_service_locator.registerService(std::make_shared<CanvasGL>("TESTE GL", 1920 / 2, 1080 / 2, false));
 
-        {
-            // New camera and light
-            Entity entity = Entity("scene", "scene_01");
-
-            // camera
-            CameraComponent& c = entity.addComponent<CameraComponent>();
-            c.cam = std::make_shared<CameraPerspective>(45.0f, 0.1, 1000.0f);
-            c.cam->setPosition(glm::vec3(5.0f, 5.0f, 2.0f));
-            c.type = CameraType::PERSPECTIVE;
-            c.tag.name = "cam01";
-            c.tag.id = "cam_01";
-            c.up = glm::vec3(0.0f, 1.0f, 0.0f);
-            c.min = 1.0f;
-            c.max = 1500.0f;
-            c.yaw = 0.0f;
-            c.pitch = 0.0f;
-
-            // light
-            LightComponent l = entity.addComponent<LightComponent>();
-            l.tag.name = "light1";
-            l.tag.id = "light_01";
-            l.vLight["light.diffuse"] = Uniform(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
-            l.vLight["light.position"] = Uniform(glm::vec3(10.0f, 10.0f, 10.0f)); // FIXME: matrix ??
-            l.vLight["light.ambient"] = Uniform(glm::vec4(0.9f, 0.9f, 0.9f, 1.0f));
-        }
-
-        { // New Object in 3d space with: transformations; mesh; material; texture; shade;
-            // Main object
-            Entity entity = Entity("Cubo01", "Cubo_01");
-
-            // space transformations
-            TransformationComponent& t = entity.addComponent<TransformationComponent>();
-            t.trans = std::make_shared<Transformation>();
-
-            // load Mesh, material, textura
-            Persistence p;
-            if (!p.loadObj("./assets/models/cubo2.obj", entity)) { // after register TextureMng
-                SDL_Log("Falha na carga do OBJ");
-                return -1;
-            }
-
-            // shade
-            auto mng = me::g_service_locator.getService<me::ShaderMng>();
-
-            std::unordered_map<uint32_t, std::string> shader_files;
-            shader_files[GL_VERTEX_SHADER] = "./examples/template_gl/shades/vertex_shader.glsl";
-            shader_files[GL_FRAGMENT_SHADER] = "./examples/template_gl/shades/blur_shader.glsl";
-
-            ShaderComponent& shadeData = entity.addComponent<ShaderComponent>();
-            shadeData.tag.name = "teste";
-            shadeData.shader = mng->load("teste", shader_files);
-        }
-
         // Engine
         Engine engine;
 

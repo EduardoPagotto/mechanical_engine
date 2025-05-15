@@ -30,6 +30,21 @@ void Game::onAttach() {
     // glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     // TODO: implementar
+
+    // auto mng = me::g_service_locator.getService<me::ShaderMng>();
+
+    // std::unordered_map<uint32_t, std::string> shader_files;
+    // shader_files[GL_VERTEX_SHADER] = "./examples/template_gl/shades/vertex_shader.glsl";
+    // shader_files[GL_FRAGMENT_SHADER] = "./examples/template_gl/shades/blur_shader.glsl";
+
+    // std::shared_ptr<me::Shader> shade = mng->load("teste", shader_files);
+
+    // uint32_t shader_val = me::load_shader("qqq", mFiles);
+
+    // std::stringstream s;
+    // s << "Valor: " << shade->getID() << std::endl;
+    // SDL_Log("%s", s.str().c_str());
+    //  SDL_LogError(SDL_LOG_CATEGORY_GPU, "%s", s.str().c_str());
 }
 
 void Game::onDeatach() {

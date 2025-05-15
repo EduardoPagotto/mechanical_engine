@@ -13,7 +13,6 @@ add_subdirectory(configured)
 # make app
 add_subdirectory(mechanical/src/gl)
 add_subdirectory(mechanical/src/persistence)
-add_subdirectory(src)
 add_subdirectory(examples)
 
 # clean
