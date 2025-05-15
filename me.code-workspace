@@ -6,8 +6,8 @@
 	],
 	"settings": {
 		// open file with double click only
-		"workbench.editor.enablePreview": false,
-		"workbench.list.openMode": "doubleClick",
+		//"workbench.editor.enablePreview": false,
+		//"workbench.list.openMode": "doubleClick",
 		"workbench.colorCustomizations": {
 			//"editorCursor.background": "#ff0000",
 			"editorCursor.foreground": "#ffff00",

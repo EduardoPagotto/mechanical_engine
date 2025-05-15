@@ -23,8 +23,8 @@ static const uint32_t maxFrameBufferSize = 8192;
 
 FrameBuffer::FrameBuffer(const FrameBufferSpecification& spec) : framBufferID(0), rbo(0), spec(spec) {
 
-    Aux::textureParameterSetUndefined(rboSpec);
-    Aux::textureParameterSetUndefined(depthTexSpec);
+    textureParameterSetUndefined(rboSpec);
+    textureParameterSetUndefined(depthTexSpec);
 
     for (const TexParam& texParm : spec.attachments) {
 
@@ -103,7 +103,7 @@ void FrameBuffer::invalidade() {
     }
 
     // depth Texture
-    if (!Aux::textureParameterIsUndefined(depthTexSpec)) {
+    if (!textureParameterIsUndefined(depthTexSpec)) {
 
         depthAttachment = std::make_shared<Texture>(spec.width, spec.height, depthTexSpec);
 
@@ -116,7 +116,7 @@ void FrameBuffer::invalidade() {
     }
 
     // depth R.B.O.
-    if (!Aux::textureParameterIsUndefined(rboSpec)) {
+    if (!textureParameterIsUndefined(rboSpec)) {
 
         TexFormat tf = rboSpec.format;          // GL_DEPTH_COMPONENT
         TexFormat tfi = rboSpec.internalFormat; // GL_DEPTH_ATTACHMENT
@@ -139,7 +139,7 @@ void FrameBuffer::bind() const {
     glBindFramebuffer(GL_FRAMEBUFFER, framBufferID);
 
     GLbitfield mask = 0;
-    if (!Aux::textureParameterIsUndefined(rboSpec) || !Aux::textureParameterIsUndefined(depthTexSpec))
+    if (!textureParameterIsUndefined(rboSpec) || !textureParameterIsUndefined(depthTexSpec))
         mask |= GL_DEPTH_BUFFER_BIT;
 
     if (colorAttachments.size() > 1)

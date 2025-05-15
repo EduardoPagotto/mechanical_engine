@@ -39,13 +39,6 @@ enum class TexDType {
 };
 
 struct TexParam {
-    TexParam() = default;
-    TexParam(const TexParam& o) = default;
-    TexParam(TexFormat format, TexFormat internalFormat, TexFilter minFilter, TexFilter magFilter, TexWrap wrap_r,
-             TexWrap wrap_s, TexWrap wrap_t, TexDType type)
-        : format(format), internalFormat(internalFormat), minFilter(minFilter), magFilter(magFilter), wrap_r(wrap_r),
-          wrap_s(wrap_s), wrap_t(wrap_t), type(type), samples(1) {}
-
     TexFormat format = TexFormat::RGBA;
     TexFormat internalFormat = TexFormat::RGBA;
     TexFilter minFilter = TexFilter::NEAREST;
@@ -55,9 +48,18 @@ struct TexParam {
     TexWrap wrap_t = TexWrap::REPEAT;
     TexDType type = TexDType::UNSIGNED_BYTE;
     int samples = 1;
+
+    TexParam() = default;
+
+    TexParam(const TexParam& o) = default;
+
+    TexParam(TexFormat format, TexFormat internalFormat, TexFilter minFilter, TexFilter magFilter, TexWrap wrap_r,
+             TexWrap wrap_s, TexWrap wrap_t, TexDType type)
+        : format(format), internalFormat(internalFormat), minFilter(minFilter), magFilter(magFilter), wrap_r(wrap_r),
+          wrap_s(wrap_s), wrap_t(wrap_t), type(type), samples(1) {}
 };
 
-namespace Aux {
+[[maybe_unused]]
 static void textureParameterSetUndefined(TexParam& val) {
     val.format = TexFormat::NONE;
     val.internalFormat = TexFormat::NONE;
@@ -69,10 +71,10 @@ static void textureParameterSetUndefined(TexParam& val) {
     val.type = TexDType::NONE;
 }
 
+[[maybe_unused]]
 static bool textureParameterIsUndefined(const TexParam& val) {
     return (val.format == TexFormat::NONE && val.internalFormat == TexFormat::NONE);
 }
-} // namespace Aux
 
 class Texture {
   private:
