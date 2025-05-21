@@ -4,8 +4,9 @@
 #include <memory>
 
 namespace me {
-struct MeshComponent {
-    TagInfo tag;
-    std::shared_ptr<Mesh> mesh;
-};
+
+    struct MeshComponent {
+        TagInfo tag;
+        std::shared_ptr<Mesh> mesh;
+    };
 } // namespace me

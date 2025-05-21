@@ -5,70 +5,72 @@
 
 namespace me {
 
-struct ViewProjectionMatrix {
+    struct ViewProjectionMatrix {
 
-    glm::mat4 view, viewProjection, viewProjectionInverse;
+        glm::mat4 view, viewProjection, viewProjectionInverse;
 
-    ViewProjectionMatrix() = default;
+        ViewProjectionMatrix() = default;
 
-    void update(const glm::mat4& _view, const glm::mat4& _projection) {
-        view = _view;
-        viewProjection = _projection * _view;
-        viewProjectionInverse = glm::inverse(_view) * glm::inverse(_projection);
-    }
-};
+        void update(const glm::mat4& _view, const glm::mat4& _projection) {
+            view = _view;
+            viewProjection = _projection * _view;
+            viewProjectionInverse = glm::inverse(_view) * glm::inverse(_projection);
+        }
+    };
 
-class IViewProjection : public IService {
-  public:
-    virtual ~IViewProjection() = default;
-    virtual const float getNoze() const = 0;
-    virtual void setNoze(const float& noze) = 0;
-    virtual void setIndex(const uint8_t s) = 0;
-    virtual const uint8_t getSize() const = 0;
-    virtual ViewProjectionMatrix& getSel() = 0;
-    virtual ViewProjectionMatrix& getLeft() = 0;  // 0
-    virtual ViewProjectionMatrix& getRight() = 0; // 1
-};
+    class IViewProjection : public IService {
 
-class ViewProjection : public ServiceBase<IViewProjection> {
-  private:
-    float noze{0.0f};
-    uint8_t indice{0};
-    uint8_t size{1};
-    std::array<ViewProjectionMatrix, 2> vpm;
+      public:
+        virtual ~IViewProjection() = default;
+        virtual const float getNoze() const = 0;
+        virtual void setNoze(const float& noze) = 0;
+        virtual void setIndex(const uint8_t s) = 0;
+        virtual const uint8_t getSize() const = 0;
+        virtual ViewProjectionMatrix& getSel() = 0;
+        virtual ViewProjectionMatrix& getLeft() = 0;  // 0
+        virtual ViewProjectionMatrix& getRight() = 0; // 1
+    };
 
-  public:
-    explicit ViewProjection() = default;
+    class ViewProjection : public ServiceBase<IViewProjection> {
 
-    explicit ViewProjection(const float& noze) { this->setNoze(noze); }
+      private:
+        float noze{0.0f};
+        uint8_t indice{0};
+        uint8_t size{1};
+        std::array<ViewProjectionMatrix, 2> vpm;
 
-    ViewProjection(const ViewProjection& o) = delete;
+      public:
+        explicit ViewProjection() = default;
 
-    ViewProjection& operator=(const ViewProjection& o) = delete;
+        explicit ViewProjection(const float& noze) { this->setNoze(noze); }
 
-    virtual ~ViewProjection() = default;
+        ViewProjection(const ViewProjection& o) = delete;
 
-    virtual const float getNoze() const { return noze; }
+        ViewProjection& operator=(const ViewProjection& o) = delete;
 
-    virtual void setNoze(const float& noze) {
-        this->noze = noze;
-        size = (noze == 0.0f) ? 1 : 2;
-    }
+        virtual ~ViewProjection() = default;
 
-    virtual void setIndex(const uint8_t s) { indice = (s >= 0 && s < 2) ? s : 0; }
+        virtual const float getNoze() const { return noze; }
 
-    virtual const uint8_t getSize() const { return size; }
+        virtual void setNoze(const float& noze) {
+            this->noze = noze;
+            size = (noze == 0.0f) ? 1 : 2;
+        }
 
-    virtual ViewProjectionMatrix& getSel() { return vpm[indice]; }
+        virtual void setIndex(const uint8_t s) { indice = (s >= 0 && s < 2) ? s : 0; }
 
-    virtual ViewProjectionMatrix& getLeft() { return vpm[0]; } // 0
+        virtual const uint8_t getSize() const { return size; }
 
-    virtual ViewProjectionMatrix& getRight() { return vpm[1]; } // 1
-};
+        virtual ViewProjectionMatrix& getSel() { return vpm[indice]; }
 
-// struct ViewProjectionComponent {
-//     ViewProjectionComponent() = default;
-//     IViewProjection* vp = nullptr;
-// };
+        virtual ViewProjectionMatrix& getLeft() { return vpm[0]; } // 0
+
+        virtual ViewProjectionMatrix& getRight() { return vpm[1]; } // 1
+    };
+
+    // struct ViewProjectionComponent {
+    //     ViewProjectionComponent() = default;
+    //     IViewProjection* vp = nullptr;
+    // };
 
 } // namespace me

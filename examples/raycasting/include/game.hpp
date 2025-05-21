@@ -3,6 +3,7 @@
 #include "raycasting.hpp"
 
 class Game : public me::IStateMachine {
+
     State* state;
     World* world;
     float moveSpeed;

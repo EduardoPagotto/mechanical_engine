@@ -5,9 +5,9 @@
 
 namespace me {
 
-struct TransformationComponent {
-    TagInfo tag;
-    std::shared_ptr<ITransformation> trans;
-};
+    struct TransformationComponent {
+        TagInfo tag;
+        std::shared_ptr<ITransformation> trans;
+    };
 
 } // namespace me

@@ -1,14 +1,11 @@
 #include "game.hpp"
 #include "mechanical/core/engine.hpp"
-#include "mechanical/gl/canvas_gl.hpp"
-// #include "mechanical/core/joystick.hpp"
 #include "mechanical/core/keyboard.hpp"
-// #include "mechanical/core/mouse.hpp"
-// #include "mechanical/core/pad.hpp"
 #include "mechanical/ecs/camera_component.hpp"
 #include "mechanical/ecs/light_component.hpp"
 #include "mechanical/ecs/shader_component.hpp"
 #include "mechanical/ecs/transformation_component.hpp"
+#include "mechanical/gl/canvas_gl.hpp"
 #include "mechanical/gl/shader_manager.hpp"
 #include "mechanical/gl/texture_manager.hpp"
 #include "mechanical/persistence/persistence.hpp"
@@ -16,6 +13,10 @@
 #include <config_params.hpp>
 #include <iostream>
 #include <string>
+
+// #include "mechanical/core/joystick.hpp"
+// #include "mechanical/core/mouse.hpp"
+// #include "mechanical/core/pad.hpp"
 
 // ref: https://glusoft.com/sdl3-tutorials/use-opengl-shaders/
 

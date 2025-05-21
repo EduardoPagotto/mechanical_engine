@@ -2,6 +2,7 @@
 #include "mechanical/core/interfaces.hpp"
 
 class Game : public me::IStateMachine {
+
     std::shared_ptr<me::ICanva> canvas;
     std::shared_ptr<me::IKeyboard> keyboard;
     std::shared_ptr<me::IEvent> evenMng;

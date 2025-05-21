@@ -4,8 +4,9 @@
 #include <memory>
 
 namespace me {
-struct MaterialComponent {
-    TagInfo tag;
-    MapUniform vMaterial; // listMaterial;
-};
+
+    struct MaterialComponent {
+        TagInfo tag;
+        MapUniform vMaterial; // listMaterial;
+    };
 } // namespace me

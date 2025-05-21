@@ -1,69 +1,72 @@
 #pragma once
-// #include "mechanical/core/types_base.hpp"
 #include <glm/gtc/matrix_transform.hpp>
-// #include <memory>
 
 namespace me {
 
-// #define FPSCAMERA_MAX_SPEED 40.0f
-// #define FPSCAMERA_ROTATION_SENSITIVITY 0.3f
-// #define CAMERA_MAX_FOV 45.0f
-// enum class CamKind { FPS = 0, ORBIT = 1, STATIC = 3 };
+    // #define FPSCAMERA_MAX_SPEED            40.0f
+    // #define FPSCAMERA_ROTATION_SENSITIVITY 0.3f
+    // #define CAMERA_MAX_FOV                 45.0f
 
-class Camera {
-  protected:
-    glm::vec3 position{glm::vec3(0, 0, 0)};
-    glm::mat4 projection{glm::mat4(1.0f)};
-    float near{0.1f}, far{1000.0f};
+    // enum class CamKind { FPS = 0, ORBIT = 1, STATIC = 3 };
 
-  public:
-    const glm::mat4& getProjection() const { return projection; }
-    const glm::vec3& getPosition() const { return position; }
-    void setPosition(const glm::vec3& position) { this->position = position; }
-    virtual void setViewportSize(const uint32_t& width, const uint32_t& height) = 0;
-};
+    class Camera {
 
-class CameraOrtho : public Camera {
-  private:
-    float xsize{0.0f}, ysize{0.0f}, xmag{800.0f}, ymag{600.0f};
+      protected:
+        glm::vec3 position{glm::vec3(0, 0, 0)};
+        glm::mat4 projection{glm::mat4(1.0f)};
+        float near{0.1f}, far{1000.0f};
 
-  public:
-    CameraOrtho(const float& xmag, const float& ymag, const float& near, const float& far) : xmag(xmag), ymag(ymag) {
-        this->near = near;
-        this->far = far;
-    }
+      public:
+        const glm::mat4& getProjection() const { return projection; }
+        const glm::vec3& getPosition() const { return position; }
+        void setPosition(const glm::vec3& position) { this->position = position; }
+        virtual void setViewportSize(const uint32_t& width, const uint32_t& height) = 0;
+    };
 
-    virtual ~CameraOrtho() = default;
+    class CameraOrtho : public Camera {
 
-    virtual void setViewportSize(const uint32_t& width, const uint32_t& height) override {
-        const float halfAspectRatio = ((float)width / (float)height) * 0.5f;
-        xsize = xmag * halfAspectRatio;
-        ysize = ymag * 0.5f;
-        projection = glm::ortho(-xsize, xsize, -ysize, ysize, near, far);
-    }
+      private:
+        float xsize{0.0f}, ysize{0.0f}, xmag{800.0f}, ymag{600.0f};
 
-    const glm::vec2 getSize() const { return glm::vec2(xsize, ysize); }
-};
+      public:
+        CameraOrtho(const float& xmag, const float& ymag, const float& near, const float& far)
+            : xmag(xmag), ymag(ymag) {
+            this->near = near;
+            this->far = far;
+        }
 
-class CameraPerspective : public Camera {
-  private:
-    float fov{45.0f};
+        virtual ~CameraOrtho() = default;
 
-  public:
-    CameraPerspective(const float& fov, const float& near, const float& far) : fov(fov) {
-        this->near = near;
-        this->far = far;
-    }
+        virtual void setViewportSize(const uint32_t& width, const uint32_t& height) override {
+            const float halfAspectRatio = ((float)width / (float)height) * 0.5f;
+            xsize = xmag * halfAspectRatio;
+            ysize = ymag * 0.5f;
+            projection = glm::ortho(-xsize, xsize, -ysize, ysize, near, far);
+        }
 
-    virtual ~CameraPerspective() = default;
+        const glm::vec2 getSize() const { return glm::vec2(xsize, ysize); }
+    };
 
-    virtual void setViewportSize(const uint32_t& width, const uint32_t& height) override {
-        projection = glm::perspective(glm::radians(fov), (float)width / (float)height, near, far);
-    }
-};
+    class CameraPerspective : public Camera {
 
-enum class CameraType {
-    ORTHO,
-    PERSPECTIVE,
-};
+      private:
+        float fov{45.0f};
+
+      public:
+        CameraPerspective(const float& fov, const float& near, const float& far) : fov(fov) {
+            this->near = near;
+            this->far = far;
+        }
+
+        virtual ~CameraPerspective() = default;
+
+        virtual void setViewportSize(const uint32_t& width, const uint32_t& height) override {
+            projection = glm::perspective(glm::radians(fov), (float)width / (float)height, near, far);
+        }
+    };
+
+    enum class CameraType {
+        ORTHO,
+        PERSPECTIVE,
+    };
 } // namespace me

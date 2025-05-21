@@ -2,6 +2,7 @@
 #include "mechanical/core/events.hpp"
 
 Game::Game() : IStateMachine("Game") {
+
     using namespace me;
     // init framebuffer
     canvas = g_service_locator.getService<ICanva>();
@@ -11,6 +12,7 @@ Game::Game() : IStateMachine("Game") {
 }
 
 Game::~Game() {
+
     canvas = nullptr;
     keyboard = nullptr;
 }
@@ -37,6 +39,7 @@ void Game::onAttach() {
 void Game::onDeatach() {}
 
 bool Game::onEvent(const SDL_Event& event) {
+
     using namespace me;
 
     keyboard->getEvent(event);
@@ -53,6 +56,7 @@ bool Game::onEvent(const SDL_Event& event) {
 }
 
 void Game::onUpdate(const double& ts) {
+
     using namespace me;
 
     if (keyboard->isPressed(SDLK_ESCAPE)) {

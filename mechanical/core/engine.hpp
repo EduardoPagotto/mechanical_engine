@@ -8,118 +8,120 @@ constexpr uint32_t miniumCountDelta = 1000 / 140;
 
 namespace me {
 
-/// @brief Engine
-/// @author <a href="mailto:edupagotto@gmail.com.com">Eduardo Pagotto</a>
-/// @since 20130925
-/// @date 20250401
-class Engine {
-  private:
-    std::shared_ptr<ICanva> canvas;
-    std::shared_ptr<IEvent> evenMng;
-    uint32_t fps = 140;
-    Timer timerFPS;
-    StateStack stack;
+    /// @brief Engine
+    /// @author <a href="mailto:edupagotto@gmail.com.com">Eduardo Pagotto</a>
+    /// @since 20130925
+    /// @date 20250401
+    class Engine {
 
-  public:
-    /// @brief Start timer, get canvas from ServiceLocator
-    Engine() {
+      private:
+        std::shared_ptr<ICanva> canvas;
+        std::shared_ptr<IEvent> evenMng;
+        uint32_t fps = 140;
+        Timer timerFPS;
+        StateStack stack;
 
-        SDL_Log("Mechanical Engine starting..");
+      public:
+        /// @brief Start timer, get canvas from ServiceLocator
+        Engine() {
 
-        timerFPS.setElapsedCount(1000);
-        timerFPS.start();
+            SDL_Log("Mechanical Engine starting..");
 
-        evenMng = g_service_locator.getService<IEvent>();
-        canvas = g_service_locator.getService<ICanva>();
-        // vp = g_service_locator.getService<IViewProjection>();
-    }
+            timerFPS.setElapsedCount(1000);
+            timerFPS.start();
 
-    virtual ~Engine() {
-        canvas.reset();
-        // vp.reset();
-    }
+            evenMng = g_service_locator.getService<IEvent>();
+            canvas = g_service_locator.getService<ICanva>();
+            // vp = g_service_locator.getService<IViewProjection>();
+        }
 
-    inline StateStack& getStack() { return stack; }
+        virtual ~Engine() {
+            canvas.reset();
+            // vp.reset();
+        }
 
-    /// @brief Runtime
-    void run() {
-        SDL_Event event;
-        bool kill{false}, pause{true};
-        uint32_t beginCount{0}, countDelta{7};
-        double ts{0.0f};
+        inline StateStack& getStack() { return stack; }
 
-        while (!kill) {
-            beginCount = SDL_GetTicks();
-            while (SDL_PollEvent(&event)) {
-                switch (event.type) {
-                    case SDL_EVENT_USER: {
+        /// @brief Runtime
+        void run() {
 
-                        switch (static_cast<EventME>(event.user.code)) {
-                            case EventME::FLOW_PAUSE: {
-                                pause = true;
-                                SDL_LogDebug(SDL_LOG_CATEGORY_APPLICATION, "Paused Receive");
-                            } break;
-                            case EventME::FLOW_RESUME: {
-                                pause = false;
-                                SDL_LogDebug(SDL_LOG_CATEGORY_APPLICATION, "Resume Receive");
-                            } break;
-                            case EventME::FLOW_STOP: {
-                                SDL_Event l_eventQuit;
-                                l_eventQuit.type = SDL_EVENT_QUIT;
-                                if (!SDL_PushEvent(&l_eventQuit)) {
-                                    SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Critical SDL_QUIT PushEvent fail: %s",
-                                                 SDL_GetError());
-                                }
-                            } break;
-                            case EventME::TOGGLE_FULL_SCREEN:
-                                canvas->toggleFullScreen();
-                                break;
-                            default:
-                                break;
+            SDL_Event event;
+            bool kill{false}, pause{true};
+            uint32_t beginCount{0}, countDelta{7};
+            double ts{0.0f};
+
+            while (!kill) {
+                beginCount = SDL_GetTicks();
+                while (SDL_PollEvent(&event)) {
+                    switch (event.type) {
+                        case SDL_EVENT_USER: {
+
+                            switch (static_cast<EventME>(event.user.code)) {
+                                case EventME::FLOW_PAUSE: {
+                                    pause = true;
+                                    SDL_LogDebug(SDL_LOG_CATEGORY_APPLICATION, "Paused Receive");
+                                } break;
+                                case EventME::FLOW_RESUME: {
+                                    pause = false;
+                                    SDL_LogDebug(SDL_LOG_CATEGORY_APPLICATION, "Resume Receive");
+                                } break;
+                                case EventME::FLOW_STOP: {
+                                    SDL_Event l_eventQuit;
+                                    l_eventQuit.type = SDL_EVENT_QUIT;
+                                    if (!SDL_PushEvent(&l_eventQuit)) {
+                                        SDL_LogError(SDL_LOG_CATEGORY_APPLICATION,
+                                                     "Critical SDL_QUIT PushEvent fail: %s", SDL_GetError());
+                                    }
+                                } break;
+                                case EventME::TOGGLE_FULL_SCREEN:
+                                    canvas->toggleFullScreen();
+                                    break;
+                                default:
+                                    break;
+                            }
                         }
+
+                        break;
+                        case SDL_EVENT_QUIT:
+                            kill = true;
+                            break;
+                        case SDL_EVENT_WINDOW_RESIZED: {
+                            canvas->reshape(event.window.data1, event.window.data2);
+                        } break;
+                        default:
+                            break;
                     }
 
-                    break;
-                    case SDL_EVENT_QUIT:
-                        kill = true;
-                        break;
-                    case SDL_EVENT_WINDOW_RESIZED: {
-                        canvas->reshape(event.window.data1, event.window.data2);
-                    } break;
-                    default:
-                        break;
+                    for (auto it = stack.end(); it != stack.begin();) {
+                        if ((*--it)->onEvent(event) == false)
+                            break;
+                    }
                 }
 
-                for (auto it = stack.end(); it != stack.begin();) {
-                    if ((*--it)->onEvent(event) == false)
-                        break;
+                ts = (double)countDelta / 1000.0f;
+                if (!pause) { // update game
+                    for (auto it = stack.begin(); it != stack.end(); it++)
+                        (*it)->onUpdate(ts);
+
+                    canvas->before();
+                    for (auto it = stack.begin(); it != stack.end(); it++)
+                        (*it)->onRender();
+
+                    canvas->after();
                 }
-            }
 
-            ts = (double)countDelta / 1000.0f;
-            if (!pause) { // update game
-                for (auto it = stack.begin(); it != stack.end(); it++)
-                    (*it)->onUpdate(ts);
+                if (timerFPS.stepCount() == true) { // count FPS each second
+                    fps = timerFPS.getCountStep();
+                    evenMng->send(EventME::NEW_FPS, (void*)&fps, nullptr);
+                    // utilSendEvent(EVENT_NEW_FPS, (void*)&fps, nullptr);
+                }
 
-                canvas->before();
-                for (auto it = stack.begin(); it != stack.end(); it++)
-                    (*it)->onRender();
-
-                canvas->after();
-            }
-
-            if (timerFPS.stepCount() == true) { // count FPS each second
-                fps = timerFPS.getCountStep();
-                evenMng->send(EventME::NEW_FPS, (void*)&fps, nullptr);
-                // utilSendEvent(EVENT_NEW_FPS, (void*)&fps, nullptr);
-            }
-
-            countDelta = SDL_GetTicks() - beginCount; // frame count limit
-            if (countDelta < miniumCountDelta) {
-                SDL_Delay(miniumCountDelta - countDelta);
-                countDelta = miniumCountDelta;
+                countDelta = SDL_GetTicks() - beginCount; // frame count limit
+                if (countDelta < miniumCountDelta) {
+                    SDL_Delay(miniumCountDelta - countDelta);
+                    countDelta = miniumCountDelta;
+                }
             }
         }
-    }
-};
+    };
 } // namespace me

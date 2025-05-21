@@ -6,10 +6,10 @@
 
 namespace me {
 
-using MapTex = std::unordered_map<std::string, std::shared_ptr<Texture>>;
+    using MapTex = std::unordered_map<std::string, std::shared_ptr<Texture>>;
 
-struct TextureComponent {
-    TagInfo tag;
-    MapTex vTex;
-};
+    struct TextureComponent {
+        TagInfo tag;
+        MapTex vTex;
+    };
 } // namespace me

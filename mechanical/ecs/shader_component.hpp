@@ -5,9 +5,9 @@
 
 namespace me {
 
-struct ShaderComponent {
-    TagInfo tag;
-    std::shared_ptr<Shader> shader;
-};
+    struct ShaderComponent {
+        TagInfo tag;
+        std::shared_ptr<Shader> shader;
+    };
 
 } // namespace me

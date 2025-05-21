@@ -1,16 +1,19 @@
 #include "game.hpp"
 #include "mechanical/core/canvas_fb.hpp"
 #include "mechanical/core/engine.hpp"
-// #include "mechanical/core/joystick.hpp"
 #include "mechanical/core/keyboard.hpp"
 #include "mechanical/core/mouse.hpp"
-// #include "mechanical/core/pad.hpp"
 #include <config_params.hpp>
 #include <iostream>
 #include <string>
 
+// #include "mechanical/core/joystick.hpp"
+// #include "mechanical/core/pad.hpp"
+
 int main(int argn, char** argv) {
+
     using namespace me;
+
     try {
 
         SDL_SetAppMetadata(std::string(project_name).c_str(), std::string(project_version).c_str(),

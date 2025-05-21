@@ -3,30 +3,31 @@
 
 namespace me {
 
-class Shader {
-  private:
-    uint32_t progID{0};
-    mutable std::unordered_map<std::string, int32_t> uniformLocationCache;
+    class Shader {
 
-  public:
-    explicit Shader(const uint32_t& id) noexcept : progID(id) {}
+      private:
+        uint32_t progID{0};
+        mutable std::unordered_map<std::string, int32_t> uniformLocationCache;
 
-    Shader() = delete;
+      public:
+        explicit Shader(const uint32_t& id) noexcept : progID(id) {}
 
-    Shader(const Shader& other) = delete;
+        Shader() = delete;
 
-    Shader& operator=(const Shader& other) = delete;
+        Shader(const Shader& other) = delete;
 
-    virtual ~Shader() noexcept;
+        Shader& operator=(const Shader& other) = delete;
 
-    const bool operator==(const Shader& other) const noexcept { return progID == other.progID; }
+        virtual ~Shader() noexcept;
 
-    const bool operator!=(const Shader& other) const noexcept { return !(*this == other); }
+        const bool operator==(const Shader& other) const noexcept { return progID == other.progID; }
 
-    const uint32_t getID() const noexcept { return this->progID; }
+        const bool operator!=(const Shader& other) const noexcept { return !(*this == other); }
 
-    const int32_t getUniform(const std::string& name) const noexcept;
+        const uint32_t getID() const noexcept { return this->progID; }
 
-    void setUniformU(const char* name, const Uniform& uv) noexcept;
-};
+        const int32_t getUniform(const std::string& name) const noexcept;
+
+        void setUniformU(const char* name, const Uniform& uv) noexcept;
+    };
 } // namespace me

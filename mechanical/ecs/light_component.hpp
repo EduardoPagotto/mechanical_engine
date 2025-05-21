@@ -4,8 +4,9 @@
 #include <memory>
 
 namespace me {
-struct LightComponent {
-    TagInfo tag;
-    MapUniform vLight;
-};
+
+    struct LightComponent {
+        TagInfo tag;
+        MapUniform vLight;
+    };
 } // namespace me

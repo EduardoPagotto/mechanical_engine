@@ -6,6 +6,7 @@
 #include <unordered_map>
 
 Game::Game() : IStateMachine("Game") {
+
     using namespace me;
     // init framebuffer
     canvas = g_service_locator.getService<ICanva>();
@@ -15,11 +16,13 @@ Game::Game() : IStateMachine("Game") {
 }
 
 Game::~Game() {
+
     canvas = nullptr;
     keyboard = nullptr;
 }
 
 void Game::onAttach() {
+
     glClearColor(0.f, 0.f, 0.f, 1.f); // Initialize clear color
     // Habilita o depth buffer/culling face
     glEnable(GL_DEPTH_TEST);
@@ -52,6 +55,7 @@ void Game::onDeatach() {
 }
 
 bool Game::onEvent(const SDL_Event& event) {
+
     using namespace me;
 
     keyboard->getEvent(event);
@@ -68,6 +72,7 @@ bool Game::onEvent(const SDL_Event& event) {
 }
 
 void Game::onUpdate(const double& ts) {
+
     using namespace me;
 
     if (keyboard->isPressed(SDLK_ESCAPE)) {

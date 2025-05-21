@@ -5,41 +5,42 @@
 
 namespace me {
 
-struct BufferElement {
-    uint16_t count{0};
-    uint16_t type{0};
-    uint16_t sizeOfType{0};
-    bool normalized{false};
-    uint64_t offset{0};
-    BufferElement() = default;
-};
+    struct BufferElement {
+        uint16_t count{0};
+        uint16_t type{0};
+        uint16_t sizeOfType{0};
+        bool normalized{false};
+        uint64_t offset{0};
+        BufferElement() = default;
+    };
 
-class BufferLayout {
-  private:
-    uint16_t size{0};
-    std::vector<BufferElement> layout;
+    class BufferLayout {
 
-  public:
-    BufferLayout() = default;
+      private:
+        uint16_t size{0};
+        std::vector<BufferElement> layout;
 
-    virtual ~BufferLayout() = default;
+      public:
+        BufferLayout() = default;
 
-    template <typename T>
-    inline void Push(const uint& count, const bool& normalized) {}
+        virtual ~BufferLayout() = default;
 
-    template <>
-    inline void Push<float>(const uint& count, const bool& normalized) {
-        push(count, GL_FLOAT, sizeof(float), normalized);
-    }
+        template <typename T>
+        inline void Push(const uint& count, const bool& normalized) {}
 
-    inline const std::vector<BufferElement>& getLayout() const { return layout; }
+        template <>
+        inline void Push<float>(const uint& count, const bool& normalized) {
+            push(count, GL_FLOAT, sizeof(float), normalized);
+        }
 
-    inline uint getStride() const { return size; }
+        inline const std::vector<BufferElement>& getLayout() const { return layout; }
 
-  private:
-    inline void push(uint16_t count, uint16_t type, uint16_t sizeOfType, bool normalized) {
-        layout.push_back({count, type, sizeOfType, normalized, this->size});
-        this->size += sizeOfType * count;
-    }
-};
+        inline uint getStride() const { return size; }
+
+      private:
+        inline void push(uint16_t count, uint16_t type, uint16_t sizeOfType, bool normalized) {
+            layout.push_back({count, type, sizeOfType, normalized, this->size});
+            this->size += sizeOfType * count;
+        }
+    };
 } // namespace me
